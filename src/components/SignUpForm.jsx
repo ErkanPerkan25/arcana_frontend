@@ -9,7 +9,7 @@ function SignUpForm(){
         <div className="flex flex-col items-center border-solid border-3 border-[#a89984] shadow-2xl w-150 bg-[#7c6f64] p-4 rounded-3xl ">
             <h3 className="text-center text-2xl text-[#ebdbb2]">Create an Account</h3>
             <form className="w-85 text-[#ebdbb2] p-1">
-                <label for="email">Email:</label><br/>
+                <label htmlFor="email">Email:</label><br/>
                 <input 
                     className="bg-white text-md text-black rounded-sm p-1"
                     type="text" 
@@ -20,7 +20,7 @@ function SignUpForm(){
                 />
                 <br/>
 
-                <label for="username">Username:</label><br/>
+                <label htmlFor="username">Username:</label><br/>
                 <input 
                     className="bg-white text-md text-black rounded-sm p-1"
                     type="text" 
@@ -31,7 +31,7 @@ function SignUpForm(){
                 />
                 <br/>
 
-                <label for="password">Password:</label><br/>
+                <label htmlFor="password">Password:</label><br/>
                 <input 
                     className="bg-white text-md text-black rounded-sm p-1"
                     type="password" 
@@ -41,7 +41,7 @@ function SignUpForm(){
                     placeholder="Password"
                 />
                 <br/>
-                <label for="re-password">Re-password:</label><br/>
+                <label htmlFor="re-password">Re-password:</label><br/>
                 <input 
                     className="bg-white text-md text-black rounded-sm p-1"
                     type="password" 
