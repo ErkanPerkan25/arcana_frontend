@@ -20,6 +20,7 @@ function LoginForm(){
             })
         });
 
+        console.log(res);
     }
 
     return(
