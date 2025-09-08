@@ -1,14 +1,41 @@
 import React, { useState } from "react";
+import { apiUrl } from "../api/apiUrl";
 
 function SignUpForm(){
     const [email, setEmail] = useState("");
     const [newUser, setNewUser] = useState("");
-    const [newPassword, setNewPassword] = useState("");
+    const [newPassword, setNewPassword] = useState();
+    const [passwordCheck, setPasswordCheck] = useState();
+
+
+    if(passwordCheck === newPassword){
+        console.log("Password are the same!")
+    }
+    else{
+        console.log("Password are not the same!")
+    }
+
+    async function createUser(e){
+        if(newUser === "" || newPassword === "") return;
+
+        const res = await fetch(`${apiUrl}/signUp/`, {
+            method: "POST",
+            headers: {
+                "Content-type": "application/json"
+            },
+            body: JSON.stringify({
+            })
+        });
+
+        if(res.status === 400){
+            return;
+        }
+    }
 
     return(
         <div className="flex flex-col items-center border-solid border-3 border-[#a89984] shadow-2xl w-150 bg-[#7c6f64] p-4 rounded-3xl ">
             <h3 className="text-center text-2xl text-[#ebdbb2]">Create an Account</h3>
-            <form className="w-85 text-[#ebdbb2] p-1">
+            <form className="w-85 text-[#ebdbb2] p-1" action={createUser}>
                 <label htmlFor="email">Email:</label><br/>
                 <input 
                     className="bg-white text-md text-black rounded-sm p-1"
@@ -17,6 +44,7 @@ function SignUpForm(){
                     name="email" 
                     size={30}
                     placeholder="Email"
+                    required
                 />
                 <br/>
 
@@ -24,10 +52,11 @@ function SignUpForm(){
                 <input 
                     className="bg-white text-md text-black rounded-sm p-1"
                     type="text" 
-                    id="email" 
-                    name="email" 
+                    id="username" 
+                    name="username" 
                     size={30}
-                    placeholder="Email"
+                    placeholder="Username"
+                    required
                 />
                 <br/>
 
@@ -37,8 +66,10 @@ function SignUpForm(){
                     type="password" 
                     id="password" 
                     name="password" 
+                    onChange={e => (setNewPassword(e.target.value))}
                     size={30}
                     placeholder="Password"
+                    required
                 />
                 <br/>
                 <label htmlFor="re-password">Re-password:</label><br/>
@@ -47,8 +78,10 @@ function SignUpForm(){
                     type="password" 
                     id="re-password" 
                     name="re-password" 
+                    onChange={e => (setPasswordCheck(e.target.value))}
                     size={30}
                     placeholder="Password"
+                    required
                 />
                 <br/>
                 <input 

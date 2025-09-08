@@ -5,6 +5,7 @@ import { apiUrl } from "../api/apiUrl";
 function LoginForm(){
     const [user, setUser] = useState("");
     const [password, setPassword] = useState("");
+    const [errorMsg, setErrorMsg] = useState("");
 
     async function auth(e){
         if(user === "" || password === "") return;
@@ -20,7 +21,9 @@ function LoginForm(){
             })
         });
 
-        console.log(res);
+        if(res.status === 400){
+            return setErrorMsg("Wrong username or password.");
+        }
     }
 
     return(
@@ -46,14 +49,14 @@ function LoginForm(){
                     size={30}
                     onChange={e => {setPassword(e.target.value)}}
                 />
-                <br/>
+                <p className="text-red-400 text-center mt-2">{errorMsg}</p>
                 <input 
-                    className="block w-20 text-lg bg-[#89b482] rounded-md p-2 mt-6 mr-auto ml-auto"
+                    className="block w-20 text-lg bg-[#89b482] rounded-md p-2 mt-2 mr-auto ml-auto"
                     type="submit" 
                     value="Login" 
                 />
             </form>
-            <Link to="/signup">Don't have an account?</Link>
+            <Link to="/signup" className="mt-2">Don't have an account?</Link>
         </div>
     )
 }
