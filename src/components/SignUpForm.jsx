@@ -3,7 +3,7 @@ import { apiUrl } from "../api/apiUrl";
 
 function SignUpForm(){
     const [email, setEmail] = useState("");
-    const [newUser, setNewUser] = useState("");
+    const [username, setUsername] = useState("");
     const [newPassword, setNewPassword] = useState();
     const [passwordCheck, setPasswordCheck] = useState();
 
@@ -16,7 +16,7 @@ function SignUpForm(){
     }
 
     async function createUser(e){
-        if(newUser === "" || newPassword === "") return;
+        if(username === "" || newPassword === "") return;
 
         const res = await fetch(`${apiUrl}/signUp/`, {
             method: "POST",
@@ -24,6 +24,9 @@ function SignUpForm(){
                 "Content-type": "application/json"
             },
             body: JSON.stringify({
+                username: username,
+                email: email,
+                password: newPassword
             })
         });
 
@@ -43,6 +46,7 @@ function SignUpForm(){
                     id="email" 
                     name="email" 
                     size={30}
+                    onChange={e => (setEmail(e.target.value))}
                     placeholder="Email"
                     required
                 />
@@ -55,6 +59,7 @@ function SignUpForm(){
                     id="username" 
                     name="username" 
                     size={30}
+                    onChange={e => (setUsername(e.target.value))}
                     placeholder="Username"
                     required
                 />

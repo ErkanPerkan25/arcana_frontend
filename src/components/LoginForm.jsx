@@ -24,6 +24,9 @@ function LoginForm(){
         if(res.status === 400){
             return setErrorMsg("Wrong username or password.");
         }
+        else{
+            return console.log(res);
+        }
     }
 
     return(
