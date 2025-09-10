@@ -6,44 +6,51 @@ function LoginForm(){
     const [user, setUser] = useState("");
     const [password, setPassword] = useState("");
     const [errorMsg, setErrorMsg] = useState("");
-    const [isLoggedIn, setIsLoggedIn] = useState(
-        localStorage.getItem(localStorage.getItem("isLoggedIn") || false)
+    const [isAuthenticated, setIsAuthenticated] = useState(
+        localStorage.getItem(localStorage.getItem("isAuthenticated") || false)
     );
+  
     const navigate = useNavigate();
 
     const auth = async(e) =>{
         //e.preventDefault();
-
-        if(user === "" || password === "") return;
         
-        const res = await fetch(`${apiUrl}/login/`, {
-            method: "POST",
-            headers: {
-                "Content-type": "application/json"
-            },
-            body: JSON.stringify({
-                username: user,
-                password: password
-            })
-        })
-
-        if(res.status === 400){
-            return setErrorMsg("Wrong username or password.");
+        if(isAuthenticated){
+            navigate("/dashboard");
         }
         else{
-            setIsLoggedIn(true);
-            localStorage.setItem("isLoggedIn", true);
-            navigate("/");
+            if(user === "" || password === "") return;
+            
+            const res = await fetch(`${apiUrl}/login/`, {
+                method: "POST",
+                headers: {
+                    "Content-type": "application/json"
+                },
+                body: JSON.stringify({
+                    username: user,
+                    password: password
+                })
+            })
+
+            if(res.status === 400){
+                localStorage.setItem("isAuthenticated", false);
+                return setErrorMsg("Wrong username or password.");
+            }
+            else{
+                localStorage.setItem("isAuthenticated", true);
+                navigate("/");
+            }
         }
+
     }
 
     return(
-        <div className="flex flex-col items-center border-solid border-3 border-[#a89984] shadow-2xl/150 w-150 bg-[#7c6f64] p-4 rounded-3xl ">
+        <div className="flex flex-col items-center border-solid border-3 border-[#a89984] shadow-2xl/150 w-150 bg-[#665c54] p-4 rounded-3xl ">
             <h3 className="text-center text-2xl text-[#ebdbb2]">Login</h3>
             <form className="w-85 text-[#ebdbb2] p-1" action={auth}>
-                <label className="text-lg font-bold" htmlFor="email">User:</label><br/>
+                <label className="text-lg font-bold mt-2" htmlFor="email">User:</label><br/>
                 <input 
-                    className="bg-white text-md text-black rounded-sm p-1"
+                    className="bg-white text-md text-black rounded-sm p-2 border-solid border-3 border-[#a89984]"
                     type="text" 
                     name="email" 
                     placeholder="Email or Account Name"
@@ -51,18 +58,18 @@ function LoginForm(){
                     onChange={e => {setUser(e.target.value)}}
                 />
                 <br/>
-                <label className="text-lg font-bold" htmlFor="password">Password:</label><br/>
+                <label className="text-lg font-bold mt-2" htmlFor="password">Password:</label><br/>
                 <input 
-                    className="bg-white text-md text-black rounded-sm p-1"
+                    className="bg-white text-md text-black rounded-sm p-2 border-solid border-3 border-[#a89984]"
                     type="password" 
                     name="password" 
                     placeholder="Password"
                     size={30}
                     onChange={e => {setPassword(e.target.value)}}
                 />
-                <p className="text-red-400 text-center mt-2">{errorMsg}</p>
+                <p className="text-red-400 text-center mt-4">{errorMsg}</p>
                 <input 
-                    className="block w-20 text-lg bg-[#89b482] rounded-md p-2 mt-2 mr-auto ml-auto"
+                    className="block w-20 text-lg bg-[#89b482] rounded-md p-2 mt-4 mr-auto ml-auto"
                     type="submit" 
                     value="Login" 
                 />

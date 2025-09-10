@@ -1,11 +1,13 @@
 import React, { useState } from "react";
 import { apiUrl } from "../api/apiUrl";
+import { useNavigate } from "react-router-dom";
 
 function SignUpForm(){
     const [email, setEmail] = useState("");
     const [username, setUsername] = useState("");
     const [newPassword, setNewPassword] = useState();
     const [passwordCheck, setPasswordCheck] = useState();
+    const navigate = useNavigate();
 
 
     if(passwordCheck === newPassword){
@@ -15,7 +17,7 @@ function SignUpForm(){
         console.log("Password are not the same!")
     }
 
-    async function createUser(e){
+    const createUser = async(e) =>{
         if(username === "" || newPassword === "") return;
 
         const res = await fetch(`${apiUrl}/signUp/`, {
