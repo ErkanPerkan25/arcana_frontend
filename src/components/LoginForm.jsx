@@ -1,15 +1,21 @@
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import { apiUrl } from "../api/apiUrl";
 
 function LoginForm(){
     const [user, setUser] = useState("");
     const [password, setPassword] = useState("");
     const [errorMsg, setErrorMsg] = useState("");
+    const [isLoggedIn, setIsLoggedIn] = useState(
+        localStorage.getItem(localStorage.getItem("isLoggedIn") || false)
+    );
+    const navigate = useNavigate();
 
-    async function auth(e){
+    const auth = async(e) =>{
+        //e.preventDefault();
+
         if(user === "" || password === "") return;
-
+        
         const res = await fetch(`${apiUrl}/login/`, {
             method: "POST",
             headers: {
@@ -19,13 +25,15 @@ function LoginForm(){
                 username: user,
                 password: password
             })
-        });
+        })
 
         if(res.status === 400){
             return setErrorMsg("Wrong username or password.");
         }
         else{
-            return console.log(res);
+            setIsLoggedIn(true);
+            localStorage.setItem("isLoggedIn", true);
+            navigate("/");
         }
     }
 

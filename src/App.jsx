@@ -1,7 +1,8 @@
-import { useState } from 'react'
 import {BrowserRouter, Routes, Route} from "react-router-dom"
 import LoginPage from './pages/LoginPage';
 import SignUpPage from './pages/SignUpPage';
+import HomePage from './pages/HomePage';
+import DashboardPage from './pages/DashboardPage';
 
 function App() {
     // On page load or when changing theme
@@ -20,7 +21,9 @@ function App() {
     return (
         <BrowserRouter>
             <Routes>
-                <Route path="/" element={<LoginPage />} />
+                <Route path="/" element={<HomePage />} />
+                <Route path="/dashboard" element={<DashboardPage />} />
+                <Route path="/login" element={<LoginPage />} />
                 <Route path="/signup" element={<SignUpPage />} />
             </Routes>
         </BrowserRouter>
