@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { apiUrl } from "../api/apiUrl";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 
 function SignUpForm(){
     const [email, setEmail] = useState("");
@@ -20,7 +20,7 @@ function SignUpForm(){
     const createUser = async(e) =>{
         if(username === "" || newPassword === "") return;
 
-        const res = await fetch(`${apiUrl}/signUp/`, {
+        const res = await fetch(`${apiUrl}/authenticate/signup/`, {
             method: "POST",
             headers: {
                 "Content-type": "application/json"
@@ -38,12 +38,13 @@ function SignUpForm(){
     }
 
     return(
-        <div className="flex flex-col items-center border-solid border-3 border-[#a89984] shadow-2xl w-150 bg-[#7c6f64] p-4 rounded-3xl ">
+        <div className="flex flex-col items-center border-solid border-3 border-[#a89984] shadow-2xl w-150 bg-[#665c54] p-4 rounded-3xl ">
             <h3 className="text-center text-2xl text-[#ebdbb2]">Create an Account</h3>
             <form className="w-85 text-[#ebdbb2] p-1" action={createUser}>
                 <label htmlFor="email">Email:</label><br/>
                 <input 
-                    className="bg-white text-md text-black rounded-sm p-1"
+                    className={`bg-white text-md text-black rounded-xl p-2 border-solid border-3 border-[#a89984]
+                    focus:border-sky-500 focus:outline`}
                     type="text" 
                     id="email" 
                     name="email" 
@@ -56,7 +57,7 @@ function SignUpForm(){
 
                 <label htmlFor="username">Username:</label><br/>
                 <input 
-                    className="bg-white text-md text-black rounded-sm p-1"
+                    className="bg-white text-md text-black rounded-xl p-2 border-solid border-3 border-[#a89984]"
                     type="text" 
                     id="username" 
                     name="username" 
@@ -69,7 +70,7 @@ function SignUpForm(){
 
                 <label htmlFor="password">Password:</label><br/>
                 <input 
-                    className="bg-white text-md text-black rounded-sm p-1"
+                    className="bg-white text-md text-black rounded-xl p-2 border-solid border-3 border-[#a89984]"
                     type="password" 
                     id="password" 
                     name="password" 
@@ -81,7 +82,7 @@ function SignUpForm(){
                 <br/>
                 <label htmlFor="re-password">Re-password:</label><br/>
                 <input 
-                    className="bg-white text-md text-black rounded-sm p-1"
+                    className="bg-white text-md text-black rounded-xl p-2 border-solid border-3 border-[#a89984]"
                     type="password" 
                     id="re-password" 
                     name="re-password" 
@@ -97,6 +98,7 @@ function SignUpForm(){
                     value="Submit" 
                 />
             </form>
+            <Link to="/login" className="mt-2 text-white underline underline-offset-2 hover:text-blue-400"><p>Already have an account? Sign In.</p></Link>
         </div>
     )
 }

@@ -21,13 +21,13 @@ function LoginForm(){
         else{
             if(user === "" || password === "") return;
             
-            const res = await fetch(`${apiUrl}/login/`, {
+            const res = await fetch(`${apiUrl}/authenticate/login`, {
                 method: "POST",
                 headers: {
                     "Content-type": "application/json"
                 },
                 body: JSON.stringify({
-                    username: user,
+                    email: user,
                     password: password
                 })
             })
@@ -38,7 +38,7 @@ function LoginForm(){
             }
             else{
                 localStorage.setItem("isAuthenticated", true);
-                navigate("/");
+                navigate("/dashboard");
             }
         }
 
@@ -50,7 +50,8 @@ function LoginForm(){
             <form className="w-85 text-[#ebdbb2] p-1" action={auth}>
                 <label className="text-lg font-bold mt-2" htmlFor="email">User:</label><br/>
                 <input 
-                    className="bg-white text-md text-black rounded-sm p-2 border-solid border-3 border-[#a89984]"
+                    className={`bg-white text-md text-black rounded-xl p-2 border-solid border-3 border-[#a89984]
+                    focus:border-sky-500 focus:outline`}
                     type="text" 
                     name="email" 
                     placeholder="Email or Account Name"
@@ -60,7 +61,8 @@ function LoginForm(){
                 <br/>
                 <label className="text-lg font-bold mt-2" htmlFor="password">Password:</label><br/>
                 <input 
-                    className="bg-white text-md text-black rounded-sm p-2 border-solid border-3 border-[#a89984]"
+                    className={`bg-white text-md text-black rounded-xl p-2 border-solid border-3 border-[#a89984]
+                     focus:border-sky-500 focus:outline`}
                     type="password" 
                     name="password" 
                     placeholder="Password"
@@ -74,7 +76,7 @@ function LoginForm(){
                     value="Login" 
                 />
             </form>
-            <Link to="/signup" className="mt-2">Don't have an account?</Link>
+            <Link to="/signup" className="mt-2 text-white underline underline-offset-2 hover:text-blue-400"><p>Don't have an account? Sign up.</p></Link>
         </div>
     )
 }
