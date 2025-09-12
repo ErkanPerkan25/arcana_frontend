@@ -21,7 +21,7 @@ function LoginForm(){
         else{
             if(user === "" || password === "") return;
             
-            const res = await fetch(`${apiUrl}/authenticate/login`, {
+            const response = await fetch(`${apiUrl}/authenticate/login`, {
                 method: "POST",
                 headers: {
                     "Content-type": "application/json"
@@ -32,11 +32,14 @@ function LoginForm(){
                 })
             })
 
-            if(res.status === 400){
+
+            if(response.status === 400){
                 localStorage.setItem("isAuthenticated", false);
                 return setErrorMsg("Wrong username or password.");
             }
             else{
+                const res = await response.json();
+                sessionStorage.setItem("sessionID", res.data.token);
                 localStorage.setItem("isAuthenticated", true);
                 navigate("/dashboard");
             }

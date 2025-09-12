@@ -7,16 +7,26 @@ function AccountInfo(){
 
     const accountData = async (e) =>{
         
-        const res = fetch(`${apiUrl}/`, {
+        const respone = await fetch(`${apiUrl}/dashboard/`, {
             method: "GET",
             headers: {
-                "Content-type": "application/json"
+                "Content-type": "application/json",
+                "Authorization": `Bearer ${sessionStorage.getItem("sessionID")}`,
             }
         });
+
+        if(!respone){
+            console.log(respone.status);
+        }
+        else{
+            const res = await respone.json();
+            setUsername(res.username);
+            setEmail(res.email);
+        }
     }
 
     useEffect(()=>{
-
+        accountData();
     }, [])
     return(
         <div className={`text-[#ebdbb2] border-solid border-3 border-[#a89984] shadow-2xl/150 bg-[#665c54] p-4 rounded-3xl`}>
