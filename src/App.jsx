@@ -3,6 +3,7 @@ import LoginPage from './pages/LoginPage';
 import SignUpPage from './pages/SignUpPage';
 import HomePage from './pages/HomePage';
 import DashboardPage from './pages/DashboardPage';
+import BooksPage from "./pages/BooksPage";
 
 function App() {
     // On page load or when changing theme
@@ -25,6 +26,7 @@ function App() {
                 <Route path="/dashboard" element={<DashboardPage />} />
                 <Route path="/login" element={<LoginPage />} />
                 <Route path="/signup" element={<SignUpPage />} />
+                <Route path="/books" element={<BooksPage />} />
             </Routes>
         </BrowserRouter>
     )
