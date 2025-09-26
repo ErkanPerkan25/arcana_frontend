@@ -1,7 +1,7 @@
-import React, { useEffect } from "react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import AccountInfo from "../components/AccountInfo";
+import Navbar from "../components/Navbar";
 
 function DashboardPage(){
 
@@ -16,7 +16,7 @@ function DashboardPage(){
 
     return(
         <div className="relative w-screen h-screen bg-[#32302f]">
-            <h1 className="text-[#ebdbb2] font-bold text-4xl">Dashboard</h1>
+            <Navbar />
             <AccountInfo />
         </div>
     )
