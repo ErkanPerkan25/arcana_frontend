@@ -1,15 +1,52 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Book from "../components/Book";
 import Navbar from "../components/Navbar";
 
 function BooksPage(){
+    const [data, setData] = useState([]);
+
+     
+    const bookData = async(e) =>{
+        fetch("https://openlibrary.org/search.json?q=the+lord+of+the+rings",{
+            headers: {
+                //"User-Agent" : "Arcana/1.0 (ericahansson.united@gmail.com)"
+            }
+        })
+        .then(response => response.json())
+        .then(data =>{
+            setData(data.docs[0]);
+            //console.log(data.docs[0].title);
+        })
+        .catch(error =>{
+            console.error("Error: ", error);
+        });
+
+    }
+
+    console.log(data);
+
+    useEffect(() =>{
+        bookData();
+    }, []);
+    
     return(
         <div className="relative w-screen h-screen bg-[#32302f]">
-            <h1 className="">Books</h1>
+            <Navbar />
             <div>
-                <button type="button">+</button>
+                <button 
+                    className="block w-10 text-xl bg-[#89b482] rounded-md p-1 mr-auto ml-auto"
+                    type="button"
+                >
+                    +
+                </button>
+
             </div>
             <div>
+                <Book 
+                    title={data.title}
+                    author={data.author_name}
+                    imgUrl={`https://covers.openlibrary.org/b/olid/${data.cover_edition_key}-L.jpg`}
+                />
             
             </div>
         </div>
