@@ -1,8 +1,10 @@
 import { useEffect, useState } from "react";
 import Book from "../components/Book";
 import Navbar from "../components/Navbar";
+import SearchComp from "../components/SearchComp";
 
 function BooksPage(){
+    const [search, setSearch] = useState("");
     const [data, setData] = useState([]);
 
      
@@ -40,6 +42,7 @@ function BooksPage(){
                     +
                 </button>
 
+                <SearchComp />
             </div>
             <div>
                 <Book 
