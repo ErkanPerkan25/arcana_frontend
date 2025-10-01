@@ -6,6 +6,7 @@ import SearchComp from "../components/SearchComp";
 function BooksPage(){
     const [search, setSearch] = useState("");
     const [data, setData] = useState([]);
+    const [isHidden, setHidden] = useState(true);
      
     const bookData = async(e) =>{
         fetch("https://openlibrary.org/search.json?q=the+lord+of+the+rings",{
@@ -24,27 +25,40 @@ function BooksPage(){
 
     }
 
+    const handleHidden = () =>{
+        setHidden(!isHidden);
+    }
 
-    console.log(data);
+    const setDataFromChild = (data) =>{
+        setHidden(data);
+    }
+
+
+    //console.log(data);
 
     useEffect(() =>{
         bookData();
     }, []);
 
+
+    console.log(isHidden);
+
     
     return(
         <div className="relative w-screen h-screen bg-[#32302f]">
             <Navbar />
-            <div>
+            <h1 className="text-3xl text-[#a89984] font-bold text-center">Book Collection</h1>
+            <div className="float-right mr-40">
                 <button 
-                    className="block w-10 text-xl bg-[#89b482] rounded-md p-1 mr-auto ml-auto"
+                    className="block w-10 text-xl bg-[#89b482] rounded-md p-1 mr-auto ml-auto cursor-pointer"
                     type="button"
+                    onClick={handleHidden}
                 >
                     +
                 </button>
-                <SearchComp />
             </div>
-            <div>
+            {isHidden ? "" : <SearchComp hidVar={isHidden} infoBack={setDataFromChild}/>}
+            <div className="mt-15 p-10">
                 <Book 
                     title={data.title}
                     author={data.author_name}

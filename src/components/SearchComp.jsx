@@ -1,11 +1,10 @@
 import { useEffect, useState } from "react";
 import Book from "./Book";
 
-function SearchComp({hidVar}){
+function SearchComp({hidVar, infoBack}){
     const [query, setQuery] = useState("");
     const [data, setData] = useState([]);
     const [isHidden, setIsHidden] = useState(hidVar);
-   
 
     useEffect(() =>{
 
@@ -30,14 +29,22 @@ function SearchComp({hidVar}){
         searchQuery();
     }, [query]);
 
+    const handleHidden = () =>{
+        infoBack(!isHidden);
+    }
 
     return(
-        <div id="searchComp" className="" >
-            <div id="overlay" className={`${isHidden ? "hidden" : "block"} absolute inset-0 bg-black opacity-75`} />
-            <div className="relative float-right mr-20">
-                <span className="text-4xl text-[#a89984]" onClick={() => setIsHidden(true)}>X</span>
-            </div>
+        <div id="searchComp" className={``}>
+            <div id="overlay" className={`absolute inset-0 bg-black opacity-75`} />
             <div className="absolute w-full pr-20 pl-20">
+                <div className="relative float-right mr-20">
+                    <button type="button" 
+                        className="text-4xl text-[#a89984] cursor-pointer" 
+                        onClick={handleHidden}
+                    >
+                    X
+                    </button>
+                </div>
                 <h1 className="font-bold text-5xl text-[#a89984] text-center mb-10">Add a book</h1>
                 <input
                     type="search"
