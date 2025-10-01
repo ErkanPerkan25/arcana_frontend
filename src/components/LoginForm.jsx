@@ -53,7 +53,7 @@ function LoginForm(){
             <form className="w-85 text-[#ebdbb2] p-1" action={auth}>
                 <label className="text-lg font-bold mt-2" htmlFor="email">User:</label><br/>
                 <input 
-                    className={`bg-white text-md text-black rounded-xl p-2 border-solid border-3 border-[#a89984]
+                    className={`peer bg-white text-md text-black rounded-xl p-2 border-solid border-3 border-[#a89984]
                     focus:border-sky-500 focus:outline`}
                     type="text" 
                     name="email" 
@@ -61,6 +61,7 @@ function LoginForm(){
                     size={30}
                     onChange={e => {setUser(e.target.value)}}
                 />
+                <p className="invinsible peer-invalid">Please provide a valid email address.</p>
                 <br/>
                 <label className="text-lg font-bold mt-2" htmlFor="password">Password:</label><br/>
                 <input 

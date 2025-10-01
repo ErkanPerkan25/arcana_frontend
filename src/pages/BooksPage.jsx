@@ -6,7 +6,6 @@ import SearchComp from "../components/SearchComp";
 function BooksPage(){
     const [search, setSearch] = useState("");
     const [data, setData] = useState([]);
-
      
     const bookData = async(e) =>{
         fetch("https://openlibrary.org/search.json?q=the+lord+of+the+rings",{
@@ -25,11 +24,13 @@ function BooksPage(){
 
     }
 
+
     console.log(data);
 
     useEffect(() =>{
         bookData();
     }, []);
+
     
     return(
         <div className="relative w-screen h-screen bg-[#32302f]">
@@ -41,7 +42,6 @@ function BooksPage(){
                 >
                     +
                 </button>
-
                 <SearchComp />
             </div>
             <div>
