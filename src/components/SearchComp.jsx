@@ -33,11 +33,14 @@ function SearchComp({hidVar, infoBack}){
         infoBack(!isHidden);
     }
 
+    function addBook(title, author, olid){
+    }
+
     return(
         <div id="searchComp" className={``}>
             <div id="overlay" className={`absolute inset-0 bg-black opacity-75`} />
             <div className="absolute w-full pr-20 pl-20">
-                <div className="relative float-right mr-20">
+                <div className="absolute float-right mr-20">
                     <button type="button" 
                         className="text-4xl text-[#a89984] cursor-pointer" 
                         onClick={handleHidden}
