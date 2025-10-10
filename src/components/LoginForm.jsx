@@ -24,7 +24,9 @@ function LoginForm(){
             const response = await fetch(`${apiUrl}/authenticate/login`, {
                 method: "POST",
                 headers: {
-                    "Content-type": "application/json"
+                    "Content-type": "application/json",
+                    "Authorization": `Bearer ${sessionStorage.getItem("sessionID")}`,
+
                 },
                 body: JSON.stringify({
                     email: user,

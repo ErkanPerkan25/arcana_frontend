@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import Book from "../components/Book";
 import Navbar from "../components/Navbar";
 import SearchComp from "../components/SearchComp";
+import { apiUrl } from "../api/apiUrl";
 
 function BooksPage(){
     const [search, setSearch] = useState("");
@@ -9,15 +10,16 @@ function BooksPage(){
     const [isHidden, setHidden] = useState(true);
      
     const bookData = async(e) =>{
-        fetch("https://openlibrary.org/search.json?q=the+lord+of+the+rings",{
+        await fetch(`${apiUrl}/books`,{
             headers: {
                 //"User-Agent" : "Arcana/1.0 (ericahansson.united@gmail.com)"
+                "Authorization": `Bearer ${sessionStorage.getItem("sessionID")}`,
             }
         })
         .then(response => response.json())
         .then(data =>{
-            setData(data.docs[0]);
-            //console.log(data.docs[0].title);
+            setData(data);
+            console.log(data);
         })
         .catch(error =>{
             console.error("Error: ", error);
@@ -39,10 +41,8 @@ function BooksPage(){
     useEffect(() =>{
         bookData();
     }, []);
-
-
+    
     console.log(isHidden);
-
     
     return(
         <div className="relative w-screen h-screen bg-[#32302f]">
@@ -59,12 +59,15 @@ function BooksPage(){
             </div>
             {isHidden ? "" : <SearchComp hidVar={isHidden} infoBack={setDataFromChild}/>}
             <div className="mt-15 p-10">
-                <Book 
-                    title={data.title}
-                    author={data.author_name}
-                    imgUrl={`https://covers.openlibrary.org/b/olid/${data.cover_edition_key}-L.jpg`}
-                />
-            
+                {!data ? "" : 
+                    data.map((item,key) =>(
+                    <Book 
+                        key={key}
+                        title={item.title}
+                        author={item.author}
+                        olid={item.olid}
+                    />
+                ))}
             </div>
         </div>
     )
