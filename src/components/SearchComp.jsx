@@ -9,8 +9,8 @@ function SearchComp({hidVar, infoBack}){
     useEffect(() =>{
 
         const searchQuery = async(e) =>{
-            if(query){
-                await fetch(`https://openlibrary.org/search.json?q=${query}`) 
+            if(query.length > 0){
+                await fetch(`https://openlibrary.org/search.json?q=${query}&limit=25`) 
                     .then(res => res.json())
                     .then(data =>{
                         setData(data.docs); 
@@ -37,9 +37,8 @@ function SearchComp({hidVar, infoBack}){
     }
 
     return(
-        <div id="searchComp" className={``}>
-            <div id="overlay" className={`absolute inset-0 bg-black opacity-75`} />
-            <div className="absolute w-full pr-20 pl-20">
+        <div id="overlay" className={`h-full overflow-scroll fixed inset-0 bg-black/75`}>
+            <div className="absolute w-full mt-20 pr-20 pl-20">
                 <div className="absolute float-right mr-20">
                     <button type="button" 
                         className="text-4xl text-[#a89984] cursor-pointer" 
@@ -66,7 +65,7 @@ function SearchComp({hidVar, infoBack}){
                         <Book
                             title={item.title}
                             author={item.author_name}
-                            imgUrl={`https://covers.openlibrary.org/b/olid/${item.cover_edition_key}-M.jpg`}
+                            olid={item.cover_edition_key}
                         />
                     ))}
                 </div>
