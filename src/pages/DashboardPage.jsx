@@ -6,7 +6,7 @@ import Navbar from "../components/Navbar";
 function DashboardPage(){
 
     const navigate = useNavigate();
-    const isAuthenticated = localStorage.getItem("isAuthenticated");
+    const isAuthenticated = sessionStorage.getItem("sessionID");
 
     useEffect(() =>{
         if(!isAuthenticated){

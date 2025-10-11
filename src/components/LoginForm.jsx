@@ -63,7 +63,7 @@ function LoginForm(){
                     size={30}
                     onChange={e => {setUser(e.target.value)}}
                 />
-                <p className="invinsible peer-invalid">Please provide a valid email address.</p>
+                <p className="invisible peer-invalid">Please provide a valid email address.</p>
                 <br/>
                 <label className="text-lg font-bold mt-2" htmlFor="password">Password:</label><br/>
                 <input 

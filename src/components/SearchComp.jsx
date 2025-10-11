@@ -1,10 +1,29 @@
 import { useEffect, useState } from "react";
 import Book from "./Book";
+import { apiUrl } from "../api/apiUrl";
 
 function SearchComp({hidVar, infoBack}){
     const [query, setQuery] = useState("");
     const [data, setData] = useState([]);
     const [isHidden, setIsHidden] = useState(hidVar);
+
+    const addBook = async(e) =>{
+        await fetch(`${apiUrl}/books/addBook`,{
+                method: "POST",
+                headers: {
+                    "Authorization": `Bearer ${sessionStorage.getItem("sessionID")}`,
+                },
+                body: JSON.stringify({
+                    title: "hello",
+                    author: "this",
+                    olid: "num",
+                })
+            })
+            .then(res => console.log(res))
+            .catch(error =>{
+                throw error;
+            });
+    }
 
     useEffect(() =>{
 
@@ -33,8 +52,6 @@ function SearchComp({hidVar, infoBack}){
         infoBack(!isHidden);
     }
 
-    function addBook(title, author, olid){
-    }
 
     return(
         <div id="overlay" className={`h-full overflow-scroll fixed inset-0 bg-black/75`}>
@@ -61,11 +78,13 @@ function SearchComp({hidVar, infoBack}){
                 />
 
                 <div className="grid grid-flow-row grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-                    {data.map((item) =>(
+                    {data.map((item, key) =>(
                         <Book
+                            key={key}
                             title={item.title}
                             author={item.author_name}
                             olid={item.cover_edition_key}
+                            clickFunc={addBook}
                         />
                     ))}
                 </div>
