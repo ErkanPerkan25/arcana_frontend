@@ -1,13 +1,15 @@
-import { useEffect } from "react";
-import {BrowserRouter, Routes, Route, useNavigate} from "react-router-dom"
+import {useState} from "react";
+import {BrowserRouter, Routes, Route, Navigate} from "react-router-dom"
 import LoginPage from './pages/LoginPage';
 import SignUpPage from './pages/SignUpPage';
 import HomePage from './pages/HomePage';
 import DashboardPage from './pages/DashboardPage';
 import BooksPage from "./pages/BooksPage";
-import LoginForm from "./components/LoginForm";
 
 function App() {
+    const [isAuthenticated, setIsAuthenticated] = useState(
+        sessionStorage.getItem("sessionID")
+    );
     // On page load or when changing theme
     document.documentElement.classList.toggle(
         "dark",
@@ -21,19 +23,17 @@ function App() {
     // Whenever explicity choice of OS preference
     localStorage.removeItem("theme");
 
-    const isAuthenticated = sessionStorage.getItem("sessionID");
-
     return (
         <BrowserRouter>
             <Routes>
-                <Route path="/" element={!isAuthenticated ? <LoginPage /> : <HomePage />} />
-                <Route path="/dashboard" element={!isAuthenticated ? <LoginPage /> : <DashboardPage />} />
-                <Route path="/login" element={!isAuthenticated ? <LoginPage /> :<LoginPage />} />
-                <Route path="/signup" element={!isAuthenticated ? <LoginPage /> :<SignUpPage />} />
-                <Route path="/books" element={!isAuthenticated ? <LoginPage /> :<BooksPage />} />
+                <Route path="/login" element={!isAuthenticated ? <LoginPage /> : <Navigate to="/books" /> } />
+                <Route path="/" element={isAuthenticated ? <HomePage /> : <Navigate to="/login" replace/>} />
+                <Route path="/dashboard" element={isAuthenticated ? <DashboardPage /> : <Navigate to="/login" replace/>} />
+                <Route path="/signup" element={isAuthenticated ? <SignUpPage /> : <Navigate to="/login" replace/>} />
+                <Route path="/books" element={isAuthenticated ? < BooksPage /> : <Navigate to="/login" replace/>} />
             </Routes>
         </BrowserRouter>
     )
 }
 
-export default App
+export default App;

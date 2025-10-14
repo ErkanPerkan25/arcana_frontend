@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { apiUrl } from "../api/apiUrl";
 
@@ -6,48 +6,50 @@ function LoginForm(){
     const [user, setUser] = useState("");
     const [password, setPassword] = useState("");
     const [errorMsg, setErrorMsg] = useState("");
-    const [isAuthenticated, setIsAuthenticated] = useState(
-        localStorage.getItem(localStorage.getItem("isAuthenticated") || false)
-    );
   
     const navigate = useNavigate();
+
+    /*
+    useEffect(() =>{
+        if(sessionStorage.getItem("sessionID")){
+            navigate("/books");
+        }
+        else{
+            return;
+        }
+    }, [navigate])
+    */
 
     const auth = async(e) =>{
         //e.preventDefault();
         
-        if(isAuthenticated){
-            navigate("/dashboard");
+        if(user === "" || password === "") return;
+
+        const credentials = btoa(`${user}:${password}`);
+        
+        const response = await fetch(`${apiUrl}/authenticate/login`, {
+            method: "GET",
+            headers: {
+                "Content-type": "application/json",
+                "Authorization": `Basic ${credentials}`,
+
+            },
+        });
+
+
+        if(response.status === 400){
+            localStorage.setItem("isAuthenticated", false);
+            return setErrorMsg("Wrong username or password.");
         }
         else{
-            if(user === "" || password === "") return;
-            
-            const response = await fetch(`${apiUrl}/authenticate/login`, {
-                method: "POST",
-                headers: {
-                    "Content-type": "application/json",
-                    "Authorization": `Bearer ${sessionStorage.getItem("sessionID")}`,
-
-                },
-                body: JSON.stringify({
-                    email: user,
-                    password: password
-                })
-            })
-
-
-            if(response.status === 400){
-                localStorage.setItem("isAuthenticated", false);
-                return setErrorMsg("Wrong username or password.");
-            }
-            else{
-                const res = await response.json();
-                sessionStorage.setItem("sessionID", res.data.token);
-                localStorage.setItem("isAuthenticated", true);
-                navigate("/dashboard");
-            }
+            const res = await response.json();
+            sessionStorage.setItem("sessionID", res.data.token);
+            localStorage.setItem("isAuthenticated", true);
+            navigate("/dashboard");
         }
 
     }
+    
 
     return(
         <div className="flex flex-col items-center border-solid border-3 border-[#a89984] shadow-2xl/150 w-150 bg-[#665c54] p-4 rounded-3xl ">

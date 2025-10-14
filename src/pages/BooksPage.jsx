@@ -35,14 +35,9 @@ function BooksPage(){
         setHidden(data);
     }
 
-
-    //console.log(data);
-
     useEffect(() =>{
         bookData();
     }, []);
-    
-    console.log(isHidden);
     
     return(
         <div className="relative w-screen h-screen bg-[#32302f]">
