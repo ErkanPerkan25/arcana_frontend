@@ -1,15 +1,17 @@
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import {BrowserRouter, Routes, Route, Navigate} from "react-router-dom"
 import LoginPage from './pages/LoginPage';
 import SignUpPage from './pages/SignUpPage';
 import HomePage from './pages/HomePage';
 import DashboardPage from './pages/DashboardPage';
 import BooksPage from "./pages/BooksPage";
+import { useAuth } from "./components/auth/useAuth";
 
 function App() {
     const [isAuthenticated, setIsAuthenticated] = useState(
-        sessionStorage.getItem("sessionID")
+        sessionStorage.getItem("sessionID") || null
     );
+
     // On page load or when changing theme
     document.documentElement.classList.toggle(
         "dark",
@@ -23,14 +25,17 @@ function App() {
     // Whenever explicity choice of OS preference
     localStorage.removeItem("theme");
 
+    const auth = useAuth();
+
+    
     return (
         <BrowserRouter>
             <Routes>
-                <Route path="/login" element={!isAuthenticated ? <LoginPage /> : <Navigate to="/books" /> } />
-                <Route path="/" element={isAuthenticated ? <HomePage /> : <Navigate to="/login" replace/>} />
-                <Route path="/dashboard" element={isAuthenticated ? <DashboardPage /> : <Navigate to="/login" replace/>} />
-                <Route path="/signup" element={isAuthenticated ? <SignUpPage /> : <Navigate to="/login" replace/>} />
-                <Route path="/books" element={isAuthenticated ? < BooksPage /> : <Navigate to="/login" replace/>} />
+                <Route path="/login" element={<LoginPage />} />
+                <Route path="/" element={auth.isAuthenticated ? <HomePage /> : <Navigate to="/login" replace/>} />
+                <Route path="/dashboard" element={auth.isAuthenticated ? <DashboardPage /> : <Navigate to="/login" replace/>} />
+                <Route path="/signup" element={!auth.isAuthenticated ? <SignUpPage /> : <Navigate to="/login" replace/>} />
+                <Route path="/books" element={auth.isAuthenticated ? < BooksPage /> : <Navigate to="/login" replace/>} />
             </Routes>
         </BrowserRouter>
     )

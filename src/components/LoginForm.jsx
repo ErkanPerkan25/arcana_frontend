@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { apiUrl } from "../api/apiUrl";
+import { useAuth } from "./auth/useAuth";
 
 function LoginForm(){
     const [user, setUser] = useState("");
@@ -8,19 +9,15 @@ function LoginForm(){
     const [errorMsg, setErrorMsg] = useState("");
   
     const navigate = useNavigate();
+    const auth = useAuth();
 
-    /*
     useEffect(() =>{
-        if(sessionStorage.getItem("sessionID")){
-            navigate("/books");
+        if(auth.isAuthenticated){
+            navigate("/books")
         }
-        else{
-            return;
-        }
-    }, [navigate])
-    */
+    }, [auth,navigate]);
 
-    const auth = async(e) =>{
+    const authenticate = async (e) =>{
         //e.preventDefault();
         
         if(user === "" || password === "") return;
@@ -28,33 +25,29 @@ function LoginForm(){
         const credentials = btoa(`${user}:${password}`);
         
         const response = await fetch(`${apiUrl}/authenticate/login`, {
-            method: "GET",
+            method: "POST",
             headers: {
-                "Content-type": "application/json",
                 "Authorization": `Basic ${credentials}`,
-
             },
         });
-
-
-        if(response.status === 400){
-            localStorage.setItem("isAuthenticated", false);
-            return setErrorMsg("Wrong username or password.");
-        }
-        else{
+        
+        if(response.ok){
             const res = await response.json();
             sessionStorage.setItem("sessionID", res.data.token);
             localStorage.setItem("isAuthenticated", true);
-            navigate("/dashboard");
+            auth.login(res.data.token, res.data.userId);
         }
-
+        else{
+            localStorage.setItem("isAuthenticated", false);
+            return setErrorMsg("Wrong username or password.");
+        }
     }
     
 
     return(
         <div className="flex flex-col items-center border-solid border-3 border-[#a89984] shadow-2xl/150 w-150 bg-[#665c54] p-4 rounded-3xl ">
             <h3 className="text-center text-2xl text-[#ebdbb2]">Login</h3>
-            <form className="w-85 text-[#ebdbb2] p-1" action={auth}>
+            <form className="w-85 text-[#ebdbb2] p-1" action={authenticate}>
                 <label className="text-lg font-bold mt-2" htmlFor="email">User:</label><br/>
                 <input 
                     className={`peer bg-white text-md text-black rounded-xl p-2 border-solid border-3 border-[#a89984]
@@ -82,6 +75,7 @@ function LoginForm(){
                     className="block w-20 text-lg bg-[#89b482] rounded-md p-2 mt-4 mr-auto ml-auto"
                     type="submit" 
                     value="Login" 
+                    disabled={!user || !password}
                 />
             </form>
             <Link to="/signup" className="mt-2 text-white underline underline-offset-2 hover:text-blue-400"><p>Don't have an account? Sign up.</p></Link>
