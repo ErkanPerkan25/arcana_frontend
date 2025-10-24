@@ -7,16 +7,18 @@ function SearchComp({hidVar, infoBack}){
     const [data, setData] = useState([]);
     const [isHidden, setIsHidden] = useState(hidVar);
 
-    const addBook = async(e) =>{
-        await fetch(`${apiUrl}/books/addBook`,{
+    const addBook = async(index) =>{
+        const book = data[index];
+        await fetch(`${apiUrl}/books`,{
                 method: "POST",
                 headers: {
+                    "Content-Type": "application/json",
                     "Authorization": `Bearer ${sessionStorage.getItem("sessionID")}`,
                 },
                 body: JSON.stringify({
-                    title: "hello",
-                    author: "this",
-                    olid: "num",
+                    title: book.title,
+                    author: book.author_name[0],
+                    olid: book.cover_edition_key,
                 })
             })
             .then(res => console.log(res))
@@ -29,7 +31,11 @@ function SearchComp({hidVar, infoBack}){
 
         const searchQuery = async(e) =>{
             if(query.length > 0){
-                await fetch(`https://openlibrary.org/search.json?q=${query}&limit=25`) 
+                await fetch(`https://openlibrary.org/search.json?q=${query}&limit=25`, {
+                    method: "GET",
+                    headers: {
+                    }
+                }) 
                     .then(res => res.json())
                     .then(data =>{
                         setData(data.docs); 
@@ -78,14 +84,18 @@ function SearchComp({hidVar, infoBack}){
                 />
 
                 <div className="grid grid-flow-row grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-                    {data.map((item, key) =>(
-                        <Book
-                            key={key}
-                            title={item.title}
-                            author={item.author_name}
-                            olid={item.cover_edition_key}
-                            clickFunc={addBook}
-                        />
+                    {data.map((item, index) =>(
+                        <div
+                            key={index}
+                            onClick={() => addBook(index)}
+                        >
+                            <Book
+                                key={index}
+                                title={item.title}
+                                author={item.author_name}
+                                olid={item.cover_edition_key}
+                            />
+                        </div>
                     ))}
                 </div>
             </div>
