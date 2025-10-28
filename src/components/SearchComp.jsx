@@ -9,7 +9,7 @@ function SearchComp({hidVar, infoBack}){
 
     const addBook = async(index) =>{
         const book = data[index];
-        await fetch(`${apiUrl}/books`,{
+        await fetch(`${apiUrl}/books/addBook`,{
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
