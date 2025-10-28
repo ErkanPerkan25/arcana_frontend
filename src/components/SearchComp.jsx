@@ -21,7 +21,12 @@ function SearchComp({hidVar, infoBack}){
                     olid: book.cover_edition_key,
                 })
             })
-            .then(res => console.log(res))
+            .then(res => {
+                if(res.status === 201){
+                    alert(`You added ${book.title} to your collection!`);
+                    infoBack(!isHidden);
+                }
+            })
             .catch(error =>{
                 throw error;
             });
