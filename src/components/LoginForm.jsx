@@ -59,7 +59,6 @@ function LoginForm(){
                     onChange={e => {setUser(e.target.value)}}
                 />
                 <p className="invisible peer-invalid">Please provide a valid email address.</p>
-                <br/>
                 <label className="text-lg font-bold mt-2" htmlFor="password">Password:</label><br/>
                 <input 
                     className={`bg-white text-md text-black rounded-xl p-2 border-solid border-3 border-[#a89984]

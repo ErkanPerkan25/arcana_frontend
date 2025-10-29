@@ -9,6 +9,8 @@ function SearchComp({hidVar, infoBack}){
     const [isHidden, setIsHidden] = useState(hidVar);
     const auth = useAuth();
 
+    console.log(auth.token);
+
     const addBook = async(index) =>{
         const book = data[index];
         await fetch(`${apiUrl}/books/addBook`,{
@@ -28,6 +30,7 @@ function SearchComp({hidVar, infoBack}){
                 if(res.status === 201){
                     alert(`You added ${book.title} to your collection!`);
                     infoBack(!isHidden);
+                    location.reload();
                 }
             })
             .catch(error =>{

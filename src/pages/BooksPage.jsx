@@ -53,7 +53,7 @@ function BooksPage(){
                 </button>
             </div>
             {isHidden ? "" : <SearchComp hidVar={isHidden} infoBack={setDataFromChild}/>}
-            <div className="mt-15 p-10">
+            <div className="grid grid-flow-row grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 m-20">
                 {!data ? "" : 
                     data.map((item,key) =>(
                     <Book 
