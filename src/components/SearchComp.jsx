@@ -1,11 +1,13 @@
 import { useEffect, useState } from "react";
 import Book from "./Book";
 import { apiUrl } from "../api/apiUrl";
+import { useAuth } from "./auth/useAuth";
 
 function SearchComp({hidVar, infoBack}){
     const [query, setQuery] = useState("");
     const [data, setData] = useState([]);
     const [isHidden, setIsHidden] = useState(hidVar);
+    const auth = useAuth();
 
     const addBook = async(index) =>{
         const book = data[index];
@@ -13,12 +15,13 @@ function SearchComp({hidVar, infoBack}){
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
-                    "Authorization": `Bearer ${sessionStorage.getItem("sessionID")}`,
+                    "Authorization": `Bearer ${auth.token}`,
                 },
                 body: JSON.stringify({
                     title: book.title,
                     author: book.author_name[0],
                     olid: book.cover_edition_key,
+                    cookie: auth
                 })
             })
             .then(res => {
