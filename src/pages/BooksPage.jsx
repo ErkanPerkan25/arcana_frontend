@@ -9,23 +9,6 @@ function BooksPage(){
     const [data, setData] = useState([]);
     const [isHidden, setHidden] = useState(true);
      
-    const bookData = async(e) =>{
-        await fetch(`${apiUrl}/books`,{
-            headers: {
-                //"User-Agent" : "Arcana/1.0 (ericahansson.united@gmail.com)"
-                "Authorization": `Bearer ${sessionStorage.getItem("sessionID")}`,
-            }
-        })
-        .then(response => response.json())
-        .then(data =>{
-            setData(data);
-            console.log(data);
-        })
-        .catch(error =>{
-            console.error("Error: ", error);
-        });
-
-    }
 
     const handleHidden = () =>{
         setHidden(!isHidden);
@@ -36,8 +19,33 @@ function BooksPage(){
     }
 
     useEffect(() =>{
-        bookData();
-    }, []);
+
+        const bookData = async(e) =>{
+            await fetch(`${apiUrl}/books`,{
+                headers: {
+                    //"User-Agent" : "Arcana/1.0 (ericahansson.united@gmail.com)"
+                    "Authorization": `Bearer ${sessionStorage.getItem("sessionID")}`,
+                }
+            })
+            .then(response => response.json())
+            .then(data =>{
+                setData(data);
+                console.log(data);
+            })
+            .catch(error =>{
+                console.error("Error: ", error);
+            });
+
+        }
+
+        if(isHidden == true){
+            bookData();
+        }
+        else{
+            bookData();
+        }
+
+    }, [isHidden]);
     
     return(
         <div className="relative w-screen h-screen bg-[#32302f]">
@@ -53,16 +61,18 @@ function BooksPage(){
                 </button>
             </div>
             {isHidden ? "" : <SearchComp hidVar={isHidden} infoBack={setDataFromChild}/>}
-            <div className="grid grid-flow-row grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 m-20">
-                {!data ? "" : 
-                    data.map((item,key) =>(
-                    <Book 
-                        key={key}
-                        title={item.title}
-                        author={item.author}
-                        olid={item.olid}
-                    />
-                ))}
+            <div className="m-20">
+                <div className="grid grid-flow-row grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 justify-items-center">
+                    {!data ? "" : 
+                        data.map((item,index) =>(
+                            <Book 
+                                key={index}
+                                title={item.title}
+                                author={item.author}
+                                olid={item.olid}
+                            />
+                    ))}
+                </div>
             </div>
         </div>
     )
