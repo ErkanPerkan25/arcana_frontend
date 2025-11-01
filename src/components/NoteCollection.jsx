@@ -7,6 +7,7 @@ function NoteCollection({book_id}){
     
     return(
         <div>
+            <h1 className="text-xl">{book_id}</h1>
         </div>
     )
 }

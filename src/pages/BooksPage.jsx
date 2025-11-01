@@ -65,13 +65,17 @@ function BooksPage(){
                 <div className="grid grid-flow-row grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 justify-items-center gap-15">
                     {!data ? "" : 
                         data.map((item,index) =>(
-                            <Book 
-                                key={index}
-                                title={item.title}
-                                author={item.author}
-                                olid={item.olid}
-                            />
-                    ))}
+                            <div 
+                            >
+                                <Book 
+                                    key={index}
+                                    title={item.title}
+                                    author={item.author}
+                                    olid={item.olid}
+                                />
+                            </div>
+                        ))
+                    }
                 </div>
             </div>
         </div>

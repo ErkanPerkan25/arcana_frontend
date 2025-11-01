@@ -2,9 +2,12 @@ import { useEffect, useState } from "react";
 import { apiUrl } from "../api/apiUrl";
 import UserInfo from "./UserInfo";
 import ChangePasswordComp from "./ChangePasswordComp";
+import { useAuth } from "./auth/useAuth";
 
 function AccountInfo(){
     const [data, setData] = useState([]);
+    
+    const auth = useAuth();
    
     const accountData = async (e) =>{
         
@@ -44,8 +47,9 @@ function AccountInfo(){
                 <div className={`m-3`}>
                     <h1 className={`font-bold text-2xl text-[#fb4934]`}>Sign Out</h1>
                     <button 
-                        className="block w-20 text-md bg-[#89b482] rounded-md p-1 mt-2"
+                        className="block w-20 text-md bg-[#89b482] rounded-md p-1 mt-2 hover:cursor-pointer"
                         type="button"
+                        onClick={() => auth.logout()}
                     >Logout</button>
                 </div>
             </div>
