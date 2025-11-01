@@ -6,12 +6,9 @@ import HomePage from './pages/HomePage';
 import DashboardPage from './pages/DashboardPage';
 import BooksPage from "./pages/BooksPage";
 import { useAuth } from "./components/auth/useAuth";
+import NotesPage from "./pages/NotesPage";
 
 function App() {
-    const [isAuthenticated, setIsAuthenticated] = useState(
-        sessionStorage.getItem("sessionID") || null
-    );
-
     // On page load or when changing theme
     document.documentElement.classList.toggle(
         "dark",
@@ -26,6 +23,7 @@ function App() {
     localStorage.removeItem("theme");
 
     const auth = useAuth();
+    //const params = use
 
     
     return (
@@ -36,6 +34,7 @@ function App() {
                 <Route path="/dashboard" element={auth.isAuthenticated ? <DashboardPage /> : <Navigate to="/login" replace/>} />
                 <Route path="/signup" element={!auth.isAuthenticated ? <SignUpPage /> : <Navigate to="/login" replace/>} />
                 <Route path="/books" element={auth.isAuthenticated ? < BooksPage /> : <Navigate to="/login" replace/>} />
+                <Route path="/notes/:book_id" element={auth.isAuthenticated ? <NotesPage book_id={} /> : <Navigate to="/login" replace/> } />
             </Routes>
         </BrowserRouter>
     )

@@ -34,7 +34,7 @@ function LoginForm(){
         if(response.ok){
             const res = await response.json();
             sessionStorage.setItem("sessionID", res.data.token);
-            localStorage.setItem("isAuthenticated", true);
+            //localStorage.setItem("isAuthenticated", true);
             auth.login(res.data.token, res.data.userId);
         }
         else{
