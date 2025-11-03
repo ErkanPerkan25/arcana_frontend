@@ -1,8 +1,10 @@
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import Book from "../components/Book";
 import Navbar from "../components/Navbar";
 import SearchComp from "../components/SearchComp";
 import { apiUrl } from "../api/apiUrl";
+
 
 function BooksPage(){
     const [search, setSearch] = useState("");
@@ -67,12 +69,14 @@ function BooksPage(){
                         data.map((item,index) =>(
                             <div 
                             >
+                                <Link to={`/books/${item.title}`}>
                                 <Book 
                                     key={index}
                                     title={item.title}
                                     author={item.author}
                                     olid={item.olid}
                                 />
+                                </Link>
                             </div>
                         ))
                     }
