@@ -1,14 +1,21 @@
 import { useState, useEffect } from "react";
 import OverlayComponent from "./OverlayComponent";
+import Note from "./Note";
 
 function NoteCollection({book_id}){
     const [notes, setNotes] = useState([]);
 
     const [isFocus, setIsFocus] = useState(false);
     const [isHidden, setIsHidden] = useState(true);
+    const [addNote, setAddNote] = useState(false);
 
     const getNotes = async(e) =>{
 
+    }
+
+    const handleAddBook = () =>{
+        setIsHidden(!isHidden);
+        setAddNote(true);
     }
 
     const handleHidden = () =>{
@@ -27,14 +34,15 @@ function NoteCollection({book_id}){
                 <button 
                     className="block w-10 text-xl bg-[#89b482] rounded-md p-1 mr-auto ml-auto cursor-pointer"
                     type="button"
-                    onClick={handleHidden}
+                    onClick={handleAddBook}
                 >
                     +
                 </button>
             </div>
-
+            <br />
+            
             <div>
-                {!isHidden ? <OverlayComponent hiddenStatues={setDataFromChild}/> : ""}
+                {!isHidden && addNote ? <OverlayComponent type={"add"} hiddenStatues={setDataFromChild}/> : ""}
             </div>
         </div>
     )

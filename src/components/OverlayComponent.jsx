@@ -1,14 +1,11 @@
 import { useState } from "react";
+import Note from "./Note";
 
 function OverlayComponent({type, hiddenStatues}){
     const [isHidden, setIsHidden] = useState(hiddenStatues)
 
     const handleHidden = () =>{
         hiddenStatues(!isHidden);
-    }
-
-    const setDataFromChild = (data) =>{
-        setIsHidden(data);
     }
 
     return(
@@ -21,6 +18,10 @@ function OverlayComponent({type, hiddenStatues}){
                     >
                     X
                     </button>
+                </div>
+
+                <div className="mt-20">
+                    {type === "add" ? <Note /> : ""}
                 </div>
 
             </div>
