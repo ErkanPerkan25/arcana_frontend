@@ -34,7 +34,7 @@ function App() {
                 <Route path="/dashboard" element={auth.isAuthenticated ? <DashboardPage /> : <Navigate to="/login" replace/>} />
                 <Route path="/signup" element={!auth.isAuthenticated ? <SignUpPage /> : <Navigate to="/login" replace/>} />
                 <Route path="/books" element={auth.isAuthenticated ? < BooksPage /> : <Navigate to="/login" replace/>} />
-                <Route path="/books/:book_id" element={auth.isAuthenticated ? <NotesPage /> : <Navigate to="/login" replace/> } />
+                <Route path="/books/:book_id/:book_title" element={auth.isAuthenticated ? <NotesPage /> : <Navigate to="/login" replace/> } />
             </Routes>
         </BrowserRouter>
     )

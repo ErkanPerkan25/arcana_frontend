@@ -9,7 +9,7 @@ function NotesPage({book_id}){
     return(
         <div className="relative w-screen h-screen bg-[#32302f]">
             <Navbar />
-            <NoteCollection book_id={params.book_id}/>
+            <NoteCollection book_title={params.book_title} book_id={params.book_id}/>
         </div>
     );
 }

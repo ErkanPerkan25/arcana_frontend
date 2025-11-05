@@ -69,7 +69,7 @@ function BooksPage(){
                         data.map((item,index) =>(
                             <div 
                             >
-                                <Link to={`/books/${item.title}`}>
+                                <Link to={`/books/${item._id}/${item.title}`}>
                                 <Book 
                                     key={index}
                                     title={item.title}
