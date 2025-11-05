@@ -11,21 +11,6 @@ function NoteCollection({book_title, book_id}){
 
     const auth = useAuth();
 
-    const getNotes = async(e) =>{
-        await fetch(`${apiUrl}/notes/`, {
-                method: "GET",
-                headers: {
-                    "Content-Type": "application/json",
-                    "Authorization": `Bearer ${auth.token}`,
-                }
-            })
-            .then(response =>{
-                console.log(response);
-            })
-            .catch(error =>{
-                throw error;
-            });
-    }
 
     const addNote = async(e) =>{
         await fetch(`${apiUrl}/notes/`, {
@@ -62,7 +47,30 @@ function NoteCollection({book_title, book_id}){
     }
     
     useEffect(() =>{
-    }, []);
+
+        const getNotes = async(e) =>{
+            await fetch(`${apiUrl}/notes/`, {
+                    method: "GET",
+                    headers: {
+                        "Content-Type": "application/json",
+                        "Authorization": `Bearer ${auth.token}`,
+                    },
+                    body: JSON.stringify({
+                        book_id: book_id,
+                        book_title: book_title,
+                        cookie: auth
+                    })
+                })
+                .then(response =>{
+                    console.log(response);
+                })
+                .catch(error =>{
+                    throw error;
+                });
+        }
+
+        getNotes();
+    }, [auth, book_id, book_title]);
 
     return(
         <div className="mt-15 text-[#ebdbb2]">
