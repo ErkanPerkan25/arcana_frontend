@@ -1,7 +1,7 @@
 import { useState } from "react";
-import Note from "./Note";
+import NoteForm from "./NoteForm";
 
-function OverlayComponent({type, hiddenStatues}){
+function OverlayComponent({note, hiddenStatues}){
     const [isHidden, setIsHidden] = useState(hiddenStatues)
 
     const handleHidden = () =>{
@@ -22,7 +22,7 @@ function OverlayComponent({type, hiddenStatues}){
 
                 <div className="w-full">
                     <div className="m-25">
-                        <Note font={"xl"} width={160} height={250}/> 
+                        <NoteForm font={"xl"} width={160} height={250}/> 
                     </div>
                 </div>
 

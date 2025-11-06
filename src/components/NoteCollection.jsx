@@ -11,7 +11,6 @@ function NoteCollection({book_title, book_id}){
 
     const auth = useAuth();
 
-
     const addNote = async(e) =>{
         await fetch(`${apiUrl}/notes/`, {
                 method: "POST",
@@ -33,13 +32,11 @@ function NoteCollection({book_title, book_id}){
             });
     }
 
-    const handleAddBook = () =>{
+    const handleFocusNote = (index) =>{
+        const note = notes[index];
         setIsHidden(!isHidden);
-        setNotes(<Note width={100} height={150}/>)
-    }
 
-    const handleHidden = () =>{
-        setIsHidden(!isHidden);
+        console.log("Clicked the note ", index);
     }
     
     const setDataFromChild = (data) =>{
@@ -49,20 +46,17 @@ function NoteCollection({book_title, book_id}){
     useEffect(() =>{
 
         const getNotes = async(e) =>{
-            await fetch(`${apiUrl}/notes/`, {
+            await fetch(`${apiUrl}/notes?book_id=${book_id}&user_id=${auth.username}`, {
                     method: "GET",
                     headers: {
                         "Content-Type": "application/json",
                         "Authorization": `Bearer ${auth.token}`,
                     },
-                    body: JSON.stringify({
-                        book_id: book_id,
-                        book_title: book_title,
-                        cookie: auth
-                    })
                 })
-                .then(response =>{
-                    console.log(response);
+                .then(response => response.json())
+                .then(data =>{
+                    setNotes(data);
+                    console.log(data);
                 })
                 .catch(error =>{
                     throw error;
@@ -89,6 +83,22 @@ function NoteCollection({book_title, book_id}){
             
             <div className="">
                 {!isHidden ? <OverlayComponent hiddenStatues={setDataFromChild}/> : ""}
+            </div>
+
+            <div className="m-10">
+                <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 justify-items-center gap-10">
+                    {notes.map((item, index) =>(
+                        <div className="hover:cursor-pointer" onClick={() => handleFocusNote(index)}>
+                            <Note
+                                key={index}
+                                title={item.title} 
+                                content={item.content}
+                                width={100}
+                                height={70}
+                            />
+                        </div>
+                    ))}
+                </div>
             </div>
 
         </div>
