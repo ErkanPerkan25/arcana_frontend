@@ -6,7 +6,7 @@ import { apiUrl } from "../api/apiUrl";
 
 function NoteCollection({book_title, book_id}){
     const [notes, setNotes] = useState([]);
-    const [isFocus, setIsFocus] = useState(false);
+    const [focusedNote, setFocusedNote] = useState([])
     const [isHidden, setIsHidden] = useState(true);
 
     const auth = useAuth();
@@ -35,8 +35,8 @@ function NoteCollection({book_title, book_id}){
     const handleFocusNote = (index) =>{
         const note = notes[index];
         setIsHidden(!isHidden);
-
-        console.log("Clicked the note ", index);
+        setFocusedNote(note);
+        //console.log("Clicked the note ", index);
     }
     
     const setDataFromChild = (data) =>{
@@ -72,7 +72,7 @@ function NoteCollection({book_title, book_id}){
 
             <div className="float-right mr-40">
                 <button 
-                    className="block w-10 text-xl bg-[#89b482] rounded-md p-1 mr-auto ml-auto cursor-pointer"
+                    className="block w-12 h-12 text-3xl text-black bg-[#89b482] rounded-full p-1 mr-auto ml-auto cursor-pointer"
                     type="button"
                     onClick={addNote}
                 >
@@ -82,7 +82,7 @@ function NoteCollection({book_title, book_id}){
             <br />
             
             <div className="">
-                {!isHidden ? <OverlayComponent hiddenStatues={setDataFromChild}/> : ""}
+                {!isHidden ? <OverlayComponent note={focusedNote} hiddenStatues={setDataFromChild}/> : ""}
             </div>
 
             <div className="m-10">

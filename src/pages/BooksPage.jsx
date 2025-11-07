@@ -55,7 +55,7 @@ function BooksPage(){
             <h1 className="text-3xl text-[#a89984] font-bold text-center">Book Collection</h1>
             <div className="float-right mr-40">
                 <button 
-                    className="block w-10 text-xl bg-[#89b482] rounded-md p-1 mr-auto ml-auto cursor-pointer"
+                    className="block w-12 h-12 text-3xl bg-[#89b482] rounded-full p-1 mr-auto ml-auto cursor-pointer"
                     type="button"
                     onClick={handleHidden}
                 >

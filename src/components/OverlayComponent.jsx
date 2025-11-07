@@ -22,7 +22,7 @@ function OverlayComponent({note, hiddenStatues}){
 
                 <div className="w-full">
                     <div className="m-25">
-                        <NoteForm font={"xl"} width={160} height={250}/> 
+                        <NoteForm font={"xl"} title={note.title} content={note.content} width={160} height={250}/> 
                     </div>
                 </div>
 
