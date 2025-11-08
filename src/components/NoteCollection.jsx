@@ -63,8 +63,15 @@ function NoteCollection({book_title, book_id}){
                 });
         }
 
-        getNotes();
-    }, [auth, book_id, book_title]);
+        if(isHidden == true){
+            getNotes();
+        }
+        else{
+            getNotes();
+        }
+
+        //getNotes();
+    }, [auth, book_id, book_title, isHidden]);
 
     return(
         <div className="mt-15 text-[#ebdbb2]">
