@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
 import { apiUrl } from "../api/apiUrl";
 import { useAuth } from "./auth/useAuth";
-import { debounce } from "lodash";
+import { useCallback } from "react";
 
-function NoteForm({note, width, height, font}){
+function NoteForm({note, width, height, font, onNoteUpdate}){
     const [noteTitle, setTitle] = useState(note?.title || "");
     const [noteContent, setContent] = useState(note?.content || "");
     const [isEditing, setIsEditing] = useState(false);
@@ -15,40 +15,41 @@ function NoteForm({note, width, height, font}){
         setIsEditing(false);
         setTitle(e.target.value);
     }
-
-    const saveHandler = debounce(async (e) =>{
-        setStatus("Saving...");
-        await fetch(`${apiUrl}/notes/${note._id}`, {
-            method: "PUT",
-            headers: {
-                "Content-Type": "application/json",
-                "Authorization": `Bearer ${auth.token}`,
-            },
-            body: JSON.stringify({
-                title: noteTitle,
-                content: noteContent,
-                cookie: auth
-            })
-        })
-        .then(response =>{
-            console.log(response);
-        })
-        .catch(error =>{
-            throw error;
-        })
-        console.log("Auto saving notes");
-        setStatus("Saved");
-    }, 1000);
-
+    
     const handleChange = (e) =>{
-        //setTitle(e.target.value);
         setContent(e.target.value);
-        saveHandler();
     }
 
     useEffect(() =>{
-        setContent(note.content || "");
-    }, [note]);
+        const saveHandler = setTimeout(async() =>{
+            if(!note?._id) return;
+            setStatus("Saving...");
+            await fetch(`${apiUrl}/notes/${note._id}`, {
+                method: "PUT",
+                headers: {
+                    "Content-type": "Application/json",
+                    "Authorization": `Bearer ${auth.token}`,
+                },
+                body: JSON.stringify({
+                    title: noteTitle,
+                    content: noteContent,
+                    cookie: auth
+                })
+            })
+            .then(response =>{
+                console.log(response);
+                setStatus("Saved");
+                if(onNoteUpdate) onNoteUpdate();
+            })
+            .catch(error =>{
+                console.log("Auto-save failed");
+                setStatus("Error saving");
+                throw error;
+            })
+        }, 2000);
+
+        return () => clearTimeout(saveHandler);
+    }, [note, auth, noteTitle, noteContent, onNoteUpdate]);
 
     return(
         <div className={`w-${width} h-${height} text-[#32302f] p-10 border-solid border-3 border-[#a89984] shadow-2xl/150 rounded-xl hover:cursor-pointer bg-[#ebdbb2]`}>

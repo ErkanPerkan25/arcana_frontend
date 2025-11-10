@@ -36,42 +36,37 @@ function NoteCollection({book_title, book_id}){
         const note = notes[index];
         setIsHidden(!isHidden);
         setFocusedNote(note);
-        //console.log("Clicked the note ", index);
     }
     
     const setDataFromChild = (data) =>{
         setIsHidden(data);
     }
+
+    const getNotes = async(e) =>{
+        await fetch(`${apiUrl}/notes?book_id=${book_id}&user_id=${auth.username}`, {
+                method: "GET",
+                headers: {
+                    "Content-Type": "application/json",
+                    "Authorization": `Bearer ${auth.token}`,
+                },
+            })
+            .then(response => response.json())
+            .then(data =>{
+                setNotes(data);
+                console.log(data);
+            })
+            .catch(error =>{
+                throw error;
+            });
+    }
+
+    const handleNoteUpdate = async() =>{
+        await getNotes();
+    }
     
     useEffect(() =>{
-
-        const getNotes = async(e) =>{
-            await fetch(`${apiUrl}/notes?book_id=${book_id}&user_id=${auth.username}`, {
-                    method: "GET",
-                    headers: {
-                        "Content-Type": "application/json",
-                        "Authorization": `Bearer ${auth.token}`,
-                    },
-                })
-                .then(response => response.json())
-                .then(data =>{
-                    setNotes(data);
-                    console.log(data);
-                })
-                .catch(error =>{
-                    throw error;
-                });
-        }
-
-        if(isHidden == true){
-            getNotes();
-        }
-        else{
-            getNotes();
-        }
-
-        //getNotes();
-    }, [auth, book_id, book_title, isHidden]);
+        getNotes();
+    }, []);
 
     return(
         <div className="mt-15 text-[#ebdbb2]">
@@ -89,7 +84,7 @@ function NoteCollection({book_title, book_id}){
             <br />
             
             <div className="">
-                {!isHidden ? <OverlayComponent note={focusedNote} hiddenStatues={setDataFromChild}/> : ""}
+                {!isHidden ? <OverlayComponent note={focusedNote} onNoteUpdate={handleNoteUpdate} hiddenStatus={setDataFromChild}/> : ""}
             </div>
 
             <div className="m-10">
