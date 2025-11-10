@@ -7,8 +7,7 @@ function Note({title, content, width, height, font}){
             <hr/>
             <br/>
             <div>
-                <textarea rows={12} readOnly className={`w-full text-[#32302f] text-${font} resize-none focus:outline-none`}>
-                    {content}
+                <textarea rows={12} value={content} readOnly className={`w-full text-[#32302f] text-${font} resize-none focus:outline-none`}>
                 </textarea>
             </div>
         </div>

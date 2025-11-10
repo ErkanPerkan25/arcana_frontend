@@ -1,11 +1,11 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import NoteForm from "./NoteForm";
 
-function OverlayComponent({note, hiddenStatus, onNoteUpdate}){
+function OverlayComponent({note, hiddenStatus, infoBack, onNoteUpdate}){
     const [isHidden, setIsHidden] = useState(hiddenStatus)
-
+    
     const handleHidden = () =>{
-        hiddenStatus(!isHidden);
+        infoBack(!isHidden);
     }
 
     return(

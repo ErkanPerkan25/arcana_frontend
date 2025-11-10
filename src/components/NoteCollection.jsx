@@ -84,13 +84,13 @@ function NoteCollection({book_title, book_id}){
             <br />
             
             <div className="">
-                {!isHidden ? <OverlayComponent note={focusedNote} onNoteUpdate={handleNoteUpdate} hiddenStatus={setDataFromChild}/> : ""}
+                {!isHidden ? <OverlayComponent note={focusedNote} onNoteUpdate={handleNoteUpdate} hiddenStatus={isHidden} infoBack={setDataFromChild}/> : ""}
             </div>
 
             <div className="m-10">
                 <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 justify-items-center gap-10">
                     {notes.map((item, index) =>(
-                        <div className="hover:cursor-pointer" onClick={() => handleFocusNote(index)}>
+                        <div key={index} className="hover:cursor-pointer" onClick={() => handleFocusNote(index)}>
                             <Note
                                 key={index}
                                 title={item.title} 
