@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { apiUrl } from "../api/apiUrl";
 import { useAuth } from "./auth/useAuth";
 
@@ -10,15 +10,6 @@ function NoteForm({note, width, height, font, onNoteUpdate}){
 
     const auth = useAuth();
 
-    const handleBlur = (e) =>{
-        setIsEditing(false);
-        setTitle(e.target.value);
-    }
-    
-    const handleTitle = (e) =>{
-        setTitle(e.target.value);
-    }
-    
     const handleChange = (e) =>{
         setContent(e.target.value);
     }
@@ -49,23 +40,31 @@ function NoteForm({note, width, height, font, onNoteUpdate}){
                 setStatus("Error saving");
                 throw error;
             })
-        }, 2000);
+        }, 1000);
 
         return () => clearTimeout(saveHandler);
     }, [note, auth, noteTitle, noteContent, onNoteUpdate]);
 
+    console.log(noteTitle);
+
     return(
         <div className={`w-${width} h-${height} text-[#32302f] p-10 border-solid border-3 border-[#a89984] shadow-2xl/150 rounded-xl hover:cursor-pointer bg-[#ebdbb2]`}>
-            <h1 
-                contentEditable={true} 
-                suppressContentEditableWarning={true}
-                onBlur={handleBlur} 
-                //onChange={(e) => setTitle(e.target.value)}
-                //onClick={() => setIsEditing(true)} 
-                className="text-3xl font-bold"
-            >
-                {noteTitle}
-            </h1>
+            {isEditing ?
+                <input 
+                    value={noteTitle}
+                    onChange={(e) => setTitle(e.target.value)}
+                    onBlur={() => setIsEditing(false)}
+                    autoFocus
+                    className="text-3xl font-bold"
+                />
+                :
+                <h1 
+                    onClick={() => setIsEditing(true)}
+                    className="text-3xl font-bold"
+                >
+                    {noteTitle}
+                </h1>
+            }
 
             <hr/>
             <br/>
