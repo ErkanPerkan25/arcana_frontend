@@ -46,7 +46,7 @@ function NoteCollection({book_title, book_id}){
         await fetch(`${apiUrl}/notes?book_id=${book_id}&user_id=${auth.username}`, {
                 method: "GET",
                 headers: {
-                    "Content-Type": "application/json",
+                    "Content-Type": "Application/json",
                     "Authorization": `Bearer ${auth.token}`,
                 },
             })

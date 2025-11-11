@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import { apiUrl } from "../api/apiUrl";
 import { useAuth } from "./auth/useAuth";
-import { useCallback } from "react";
 
 function NoteForm({note, width, height, font, onNoteUpdate}){
     const [noteTitle, setTitle] = useState(note?.title || "");
@@ -13,6 +12,10 @@ function NoteForm({note, width, height, font, onNoteUpdate}){
 
     const handleBlur = (e) =>{
         setIsEditing(false);
+        setTitle(e.target.value);
+    }
+    
+    const handleTitle = (e) =>{
         setTitle(e.target.value);
     }
     
@@ -54,10 +57,11 @@ function NoteForm({note, width, height, font, onNoteUpdate}){
     return(
         <div className={`w-${width} h-${height} text-[#32302f] p-10 border-solid border-3 border-[#a89984] shadow-2xl/150 rounded-xl hover:cursor-pointer bg-[#ebdbb2]`}>
             <h1 
-                contentEditable={isEditing} 
+                contentEditable={true} 
                 suppressContentEditableWarning={true}
                 onBlur={handleBlur} 
-                onClick={() => setIsEditing(true)} 
+                //onChange={(e) => setTitle(e.target.value)}
+                //onClick={() => setIsEditing(true)} 
                 className="text-3xl font-bold"
             >
                 {noteTitle}
