@@ -15,7 +15,7 @@ function NoteCollection({book_title, book_id}){
         await fetch(`${apiUrl}/notes/`, {
                 method: "POST",
                 headers: {
-                    "Content-Type": "application/json",
+                    "Content-Type": "Application/json",
                     "Authorization": `Bearer ${auth.token}`,
                 },
                 body: JSON.stringify({
@@ -30,6 +30,7 @@ function NoteCollection({book_title, book_id}){
             .catch(error =>{
                 throw error;
             });
+        await getNotes();
     }
 
     const handleFocusNote = (index) =>{
@@ -83,12 +84,10 @@ function NoteCollection({book_title, book_id}){
             </div>
             <br />
             
-            <div className="">
-                {!isHidden ? <OverlayComponent note={focusedNote} onNoteUpdate={handleNoteUpdate} hiddenStatus={isHidden} infoBack={setDataFromChild}/> : ""}
-            </div>
+            {!isHidden ? <OverlayComponent note={focusedNote} onNoteUpdate={handleNoteUpdate} hiddenStatus={isHidden} infoBack={setDataFromChild}/> : ""}
 
-            <div className="m-10">
-                <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 justify-items-center gap-10">
+            <div className="p-10">
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 justify-items-center gap-10">
                     {notes.map((item, index) =>(
                         <div key={index} className="hover:cursor-pointer" onClick={() => handleFocusNote(index)}>
                             <Note

@@ -7,7 +7,7 @@ function NotesPage({book_id}){
     const params = useParams();
 
     return(
-        <div className="relative w-screen h-screen bg-[#32302f]">
+        <div className="relative w-screen h-full m-0 bg-[#32302f]">
             <Navbar />
             <NoteCollection book_title={params.book_title} book_id={params.book_id}/>
         </div>
