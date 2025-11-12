@@ -3,6 +3,7 @@ import OverlayComponent from "./OverlayComponent";
 import { useAuth } from "./auth/useAuth";
 import Note from "./Note";
 import { apiUrl } from "../api/apiUrl";
+import DropDown from "./DropDown";
 
 function NoteCollection({book_title, book_id}){
     const [notes, setNotes] = useState([]);
@@ -64,6 +65,9 @@ function NoteCollection({book_title, book_id}){
     const handleNoteUpdate = async() =>{
         await getNotes();
     }
+
+    const deleteNote = async(e)  =>{
+    }
     
     useEffect(() =>{
         getNotes();
@@ -89,13 +93,14 @@ function NoteCollection({book_title, book_id}){
             <div className="p-10">
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 justify-items-center gap-10">
                     {notes.map((item, index) =>(
-                        <div key={index} className="hover:cursor-pointer" onClick={() => handleFocusNote(index)}>
+                        <div key={index} className="w-100 h-80 hover:cursor-pointer" >
                             <Note
                                 key={index}
                                 title={item.title} 
+                                handleFocus={handleFocusNote}
                                 content={item.content}
                                 width={100}
-                                height={70}
+                                height={80}
                             />
                         </div>
                     ))}
