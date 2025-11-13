@@ -66,7 +66,25 @@ function NoteCollection({book_title, book_id}){
         await getNotes();
     }
 
-    const deleteNote = async(e)  =>{
+    const deleteNote = async(index)  =>{
+        const note = notes[index];
+        await fetch(`${apiUrl}/notes?id=${note._id}`, {
+            method: "DELETE",
+            headers: {
+                "Content-Type": "Application/json",
+                "Authorization": `Bearer ${auth.token}`
+            },
+        })
+        .then(response => response.json())
+        .then(data =>{
+            console.log(data);
+        })
+        .throw(error =>{
+            throw error;
+        })
+
+        await getNotes();
+
     }
     
     useEffect(() =>{
@@ -101,6 +119,7 @@ function NoteCollection({book_title, book_id}){
                                 content={item.content}
                                 width={100}
                                 height={80}
+                                handleDelte={deleteNote}
                             />
                         </div>
                     ))}
