@@ -4,12 +4,15 @@ import Book from "../components/Book";
 import Navbar from "../components/Navbar";
 import SearchComp from "../components/SearchComp";
 import { apiUrl } from "../api/apiUrl";
+import { useAuth } from "../components/auth/useAuth";
 
 
 function BooksPage(){
     const [search, setSearch] = useState("");
     const [data, setData] = useState([]);
     const [isHidden, setHidden] = useState(true);
+
+    const auth = useAuth();
      
 
     const handleHidden = () =>{
@@ -20,25 +23,48 @@ function BooksPage(){
         setHidden(data);
     }
 
+    const deleteBook = async(index) =>{
+        const book = data[index];
+        await fetch(`${apiUrl}/books/${book._id}`, {
+            method: "DELETE",
+            headers:{
+                "Content-Type": "Application/json",
+                "Authorization": `Bearer ${auth.token}`,
+            },
+            body: JSON.stringify({
+                cookie: auth
+            })
+        })
+        .then(response =>{
+            console.log(response);
+        })
+        .catch(error =>{
+            throw error;
+        })
+
+        await bookData();
+    }
+
+
+    const bookData = async(e) =>{
+        await fetch(`${apiUrl}/books`,{
+            method: "GET",
+            headers: {
+                //"User-Agent" : "Arcana/1.0 (ericahansson.united@gmail.com)"
+                "Authorization": `Bearer ${sessionStorage.getItem("sessionID")}`,
+            }
+        })
+        .then(response => response.json())
+        .then(data =>{
+            setData(data);
+            console.log(data);
+        })
+        .catch(error =>{
+            console.error("Error: ", error);
+        });
+
+    }
     useEffect(() =>{
-
-        const bookData = async(e) =>{
-            await fetch(`${apiUrl}/books`,{
-                headers: {
-                    //"User-Agent" : "Arcana/1.0 (ericahansson.united@gmail.com)"
-                    "Authorization": `Bearer ${sessionStorage.getItem("sessionID")}`,
-                }
-            })
-            .then(response => response.json())
-            .then(data =>{
-                setData(data);
-                console.log(data);
-            })
-            .catch(error =>{
-                console.error("Error: ", error);
-            });
-
-        }
 
         if(isHidden == true){
             bookData();
@@ -68,14 +94,12 @@ function BooksPage(){
                     {!data ? "" : 
                         data.map((item,index) =>(
                             <div key={index}>
-                                <Link to={`/books/${item._id}/${item.title}`}>
                                     <Book 
                                         key={index}
-                                        title={item.title}
-                                        author={item.author}
-                                        olid={item.olid}
+                                        index={index}
+                                        book={item}
+                                        handleDelete={deleteBook}
                                     />
-                                </Link>
                             </div>
                         ))
                     }

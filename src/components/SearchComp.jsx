@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import Book from "./Book";
 import { apiUrl } from "../api/apiUrl";
 import { useAuth } from "./auth/useAuth";
+import BookSearch from "./BookSearch";
 
 function SearchComp({hidVar, infoBack}){
     const [query, setQuery] = useState("");
@@ -97,11 +98,10 @@ function SearchComp({hidVar, infoBack}){
                             key={index}
                             onClick={() => addBook(index)}
                         >
-                            <Book
+                            <BookSearch
                                 key={index}
-                                title={item.title}
-                                author={item.author_name}
-                                olid={item.cover_edition_key}
+                                book={item}
+                                index={index}
                             />
                         </div>
                     ))}

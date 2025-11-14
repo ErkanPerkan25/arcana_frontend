@@ -1,16 +1,21 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import DropDown from "./DropDown";
 
-function Book({title, author, olid}){
+function Book({book, index, handleDelete}){
     return(
         <div className="w-80 text-[#a89984] font-bold text-xl text-center" >
-                <img 
-                    className="w-80 h-125 mr-auto ml-auto border-solid border-3 border-[#a89984] shadow-2xl/150 mb-3 rounded-xl hover:cursor-pointer" 
-                    src={`https://covers.openlibrary.org/b/olid/${olid}-L.jpg`} 
-                    alt="book cover"
-                />
-            <h1>{title}</h1>
-            <p>{author}</p>
+
+                <Link to={`/books/${book._id}/${book.title}`}>
+                    <img 
+                        className="w-80 h-125 mr-auto ml-auto border-solid border-3 border-[#a89984] shadow-2xl/150 mb-3 rounded-xl hover:cursor-pointer" 
+                        src={`https://covers.openlibrary.org/b/olid/${book.olid}-L.jpg`} 
+                        alt="book cover"
+                    />
+                </Link>
+                <DropDown handleDelete={handleDelete} index={index}/>
+            <h1>{book.title}</h1>
+            <p>{book.author}</p>
         </div>
     );
 }
