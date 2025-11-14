@@ -75,11 +75,10 @@ function NoteCollection({book_title, book_id}){
                 "Authorization": `Bearer ${auth.token}`
             },
         })
-        .then(response => response.json())
         .then(data =>{
             console.log(data);
         })
-        .throw(error =>{
+        .catch(error =>{
             throw error;
         })
 
@@ -114,12 +113,13 @@ function NoteCollection({book_title, book_id}){
                         <div key={index} className="w-100 h-80 hover:cursor-pointer" >
                             <Note
                                 key={index}
+                                index={index}
                                 title={item.title} 
                                 handleFocus={handleFocusNote}
                                 content={item.content}
                                 width={100}
                                 height={80}
-                                handleDelte={deleteNote}
+                                handleDelete={deleteNote}
                             />
                         </div>
                     ))}

@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 
-function DropDown({handleDelete}){
+function DropDown({handleDelete, index}){
     const [isOpen, setIsOpen] = useState(false);
     const dropDownRef = useRef(null);
 
@@ -33,7 +33,7 @@ function DropDown({handleDelete}){
             {isOpen && (
                 <div className="origin-top-left absolute w-24 rounded-md shadow-lg bg-white ring-1 ring-[#a89984] ring-opacity-5 focus:outline-none">
                     <div className="py-1">
-                        <a className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" onClick={handleDelete}>Delete</a>
+                        <a className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" onClick={() => handleDelete(index)}>Delete</a>
                     </div>
                 </div>
             )}
