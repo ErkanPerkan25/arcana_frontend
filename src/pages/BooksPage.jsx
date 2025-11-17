@@ -76,7 +76,7 @@ function BooksPage(){
     }, [isHidden]);
     
     return(
-        <div className="relative w-screen h-screen bg-[#32302f]">
+        <div className="p-1 relative w-screen min-h-screen bg-[#32302f]">
             <Navbar />
             <h1 className="text-3xl text-[#a89984] font-bold text-center">Book Collection</h1>
             <div className="float-right mr-40">

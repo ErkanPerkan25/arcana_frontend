@@ -7,7 +7,7 @@ function HomePage(){
 
 
     return(
-        <div className="relative w-screen h-screen bg-[#32302f]">
+        <div className="p-1 relative w-screen h-full bg-[#32302f]">
             <Navbar />
             <h1>You are logged in!</h1>
         </div>

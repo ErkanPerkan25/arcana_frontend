@@ -28,6 +28,10 @@ function AccountInfo(){
         }
     }
     
+    const handleLogout = async() =>{
+        auth.logout();
+        window.location.reload();
+    }
 
     useEffect(()=>{
         accountData();
@@ -49,7 +53,7 @@ function AccountInfo(){
                     <button 
                         className="block w-20 text-md bg-[#89b482] rounded-md p-1 mt-2 hover:cursor-pointer"
                         type="button"
-                        onClick={() => auth.logout()}
+                        onClick={handleLogout}
                     >Logout</button>
                 </div>
             </div>

@@ -15,7 +15,7 @@ function DashboardPage(){
     }, [navigate, isAuthenticated])
 
     return(
-        <div className="relative w-screen h-screen bg-[#32302f]">
+        <div className="p-1 relative w-screen min-h-screen bg-[#32302f]">
             <Navbar />
             <AccountInfo />
         </div>
