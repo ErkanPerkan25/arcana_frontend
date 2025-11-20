@@ -5,6 +5,7 @@ import Navbar from "../components/Navbar";
 import SearchComp from "../components/SearchComp";
 import { apiUrl } from "../api/apiUrl";
 import { useAuth } from "../components/auth/useAuth";
+import Footer from "../components/Footer";
 
 
 function BooksPage(){
@@ -76,9 +77,9 @@ function BooksPage(){
     }, [isHidden]);
     
     return(
-        <div className="p-1 relative w-screen min-h-screen bg-[#32302f]">
+        <div className="font-display p-1 relative w-screen min-h-screen bg-[#32302f]">
             <Navbar />
-            <h1 className="text-3xl text-[#a89984] font-bold text-center">Book Collection</h1>
+            <h1 className="text-3xl text-[#d3869b] font-bold text-center">Book Collection</h1>
             <div className="float-right mr-40">
                 <button 
                     className="block w-12 h-12 text-3xl bg-[#89b482] rounded-full p-1 mr-auto ml-auto cursor-pointer"
@@ -93,7 +94,7 @@ function BooksPage(){
                 <div className="grid grid-flow-row grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 justify-items-center gap-15">
                     {!data ? "" : 
                         data.map((item,index) =>(
-                            <div key={index}>
+                            <div className="transition duration-200 ease-in-out hover:scale-105" key={index}>
                                     <Book 
                                         key={index}
                                         index={index}
@@ -105,6 +106,8 @@ function BooksPage(){
                     }
                 </div>
             </div>
+
+            <Footer />
         </div>
     )
 }

@@ -1,15 +1,15 @@
-import React from "react";
-import { useNavigate } from "react-router-dom";
+import { useState } from "react";
 import Navbar from "../components/Navbar"; 
-
+import Footer from "../components/Footer";
 
 function HomePage(){
 
-
     return(
-        <div className="p-1 relative w-screen h-full bg-[#32302f]">
+        <div className="font-display p-1 relative w-screen min-h-screen bg-[#32302f]">
             <Navbar />
-            <h1>You are logged in!</h1>
+            <div>
+            </div>
+            <Footer/>
         </div>
     )
 }

@@ -1,6 +1,18 @@
-@import url('https://fonts.googleapis.com/css2?family=Crimson+Text:ital,wght@0,400;0,600;0,700;1,400;1,600;1,700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&family=Stack+Sans+Headline:wght@200..700&display=swap');
 @import "tailwindcss";
 
 @theme {
-    --font-crimson: "Crimson Text", serif;
+    --font-display: "Nunito", sans-serif;
+
+    --animate-fade-in-scale: fade-in-scale 0.3s ease-out;
+    @keyframes fade-in-scale{
+        0% {
+            opacity: 0%;
+            transform: scale(0.95)
+        }
+        100% {
+            opacity: 1;
+            transform: scale(1);
+        }
+    }
 }

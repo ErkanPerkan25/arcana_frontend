@@ -51,7 +51,7 @@ function LoginForm(){
                 <label className="text-lg font-bold mt-2" htmlFor="email">User:</label><br/>
                 <input 
                     className={`peer bg-white text-md text-black rounded-xl p-2 border-solid border-3 border-[#a89984]
-                    focus:border-sky-500 focus:outline`}
+                    focus:border-sky-499 focus:outline`}
                     type="text" 
                     name="email" 
                     placeholder="Email or Account Name"

@@ -69,7 +69,7 @@ function SearchComp({hidVar, infoBack}){
 
 
     return(
-        <div id="overlay" className={`h-full overflow-scroll fixed inset-0 bg-black/75`}>
+        <div id="overlay" className={`h-full overflow-scroll fixed inset-0 bg-black/80`}>
             <div className="absolute w-full mt-20 pr-20 pl-20">
                 <div className="absolute float-right mr-20">
                     <button type="button" 
