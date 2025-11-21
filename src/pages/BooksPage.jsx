@@ -89,8 +89,7 @@ function BooksPage(){
                     +
                 </button>
             </div>
-            {isHidden ? "" : <SearchComp hidVar={isHidden} infoBack={setDataFromChild}/>}
-            <div className="m-20">
+            <div className="m-10 p-10">
                 <div className="grid grid-flow-row grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 justify-items-center gap-15">
                     {!data ? "" : 
                         data.map((item,index) =>(
@@ -106,8 +105,8 @@ function BooksPage(){
                     }
                 </div>
             </div>
-
             <Footer />
+            {isHidden ? null : <SearchComp hidVar={isHidden} infoBack={setDataFromChild}/>}
         </div>
     )
 }

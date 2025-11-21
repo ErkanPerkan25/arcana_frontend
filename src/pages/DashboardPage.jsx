@@ -19,7 +19,6 @@ function DashboardPage(){
         <div className="font-display p-1 relative w-screen min-h-screen bg-[#32302f]">
             <Navbar />
             <AccountInfo />
-            <Footer />
         </div>
     )
 }

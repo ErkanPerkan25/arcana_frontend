@@ -2,6 +2,8 @@ import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { apiUrl } from "../api/apiUrl";
 import { useAuth } from "./auth/useAuth";
+import { MdAccountCircle } from "react-icons/md";
+import { RiLockPasswordFill } from "react-icons/ri";
 
 function LoginForm(){
     const [user, setUser] = useState("");
@@ -48,7 +50,7 @@ function LoginForm(){
         <div className="flex flex-col items-center border-solid border-3 border-[#a89984] shadow-2xl/150 w-150 bg-[#665c54] p-4 rounded-3xl ">
             <h3 className="text-center text-2xl text-[#ebdbb2]">Login</h3>
             <form className="w-85 text-[#ebdbb2] p-1" action={authenticate}>
-                <label className="text-lg font-bold mt-2" htmlFor="email">User:</label><br/>
+                <label className="text-lg font-bold mt-2" htmlFor="email"><MdAccountCircle className="inline text-2xl"/> User:</label><br/>
                 <input 
                     className={`peer bg-white text-md text-black rounded-xl p-2 border-solid border-3 border-[#a89984]
                     focus:border-sky-499 focus:outline`}
@@ -59,7 +61,7 @@ function LoginForm(){
                     onChange={e => {setUser(e.target.value)}}
                 />
                 <p className="invisible peer-invalid">Please provide a valid email address.</p>
-                <label className="text-lg font-bold mt-2" htmlFor="password">Password:</label><br/>
+                <label className="text-lg font-bold mt-2" htmlFor="password"><RiLockPasswordFill className="inline text-2xl"/> Password:</label><br/>
                 <input 
                     className={`bg-white text-md text-black rounded-xl p-2 border-solid border-3 border-[#a89984]
                      focus:border-sky-500 focus:outline`}
