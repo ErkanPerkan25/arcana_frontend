@@ -8,7 +8,7 @@ function NotesPage({book_id}){
     const params = useParams();
 
     return(
-        <div className="font-display p-0 m-0 relative w-screen min-h-screen bg-[#32302f]">
+        <div className="font-display overscroll-none p-0 m-0 relative w-screen min-h-screen bg-[#32302f]">
             <Navbar />
             <NoteCollection book_title={params.book_title} book_id={params.book_id}/>
             <Footer />

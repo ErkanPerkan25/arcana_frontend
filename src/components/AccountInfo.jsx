@@ -51,7 +51,7 @@ function AccountInfo(){
                 <div className={`m-3`}>
                     <h1 className={`font-bold text-2xl text-[#fb4934]`}>Sign Out</h1>
                     <button 
-                        className="block w-20 text-md bg-[#89b482] rounded-md p-1 mt-2 hover:cursor-pointer"
+                        className="block w-20 text-md bg-[#89b482] font-bold rounded-md p-1 mt-2 hover:cursor-pointer"
                         type="button"
                         onClick={handleLogout}
                     >Logout</button>
