@@ -4,11 +4,11 @@ import DropDown from "./DropDown";
 
 function Book({book, index, handleDelete}){
     return(
-        <div className="w-80 text-[#a89984] font-bold text-xl text-center" >
+        <div className="w-80 text-[#ebdbb2] font-bold text-xl text-center" >
 
                 <Link to={`/books/${book._id}/${book.title}`}>
                     <img 
-                        className="w-80 h-125 mr-auto ml-auto border-solid border-3 border-[#a89984] shadow-2xl/150 mb-3 rounded-xl hover:cursor-pointer" 
+                        className="w-80 h-125 mr-auto ml-auto border-solid border-3 border-[#ebdbb2] shadow-2xl/150 mb-3 rounded-xl hover:cursor-pointer" 
                         src={`https://covers.openlibrary.org/b/olid/${book.olid}-L.jpg`} 
                         alt="book cover"
                     />
