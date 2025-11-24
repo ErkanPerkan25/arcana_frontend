@@ -53,7 +53,8 @@ function BooksPage(){
             headers: {
                 //"User-Agent" : "Arcana/1.0 (ericahansson.united@gmail.com)"
                 "Authorization": `Bearer ${auth.token}`,
-            }
+            },
+            credentials: "include"
         })
         .then(response => response.json())
         .then(data =>{
