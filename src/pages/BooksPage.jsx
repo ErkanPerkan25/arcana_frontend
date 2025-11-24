@@ -52,6 +52,7 @@ function BooksPage(){
             method: "GET",
             headers: {
                 //"User-Agent" : "Arcana/1.0 (ericahansson.united@gmail.com)"
+                "Access-Control-Allow-Origin": "*",
                 "Authorization": `Bearer ${auth.token}`,
             }
         })

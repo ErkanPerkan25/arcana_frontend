@@ -29,6 +29,7 @@ function LoginForm(){
         const response = await fetch(`${apiUrl}/authenticate/login`, {
             method: "POST",
             headers: {
+                "Access-Control-Allow-Origin": "*",
                 "Authorization": `Basic ${credentials}`,
             },
         });
