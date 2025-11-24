@@ -32,6 +32,7 @@ function LoginForm(){
                 "Content-Type": "application/json",
                 "Authorization": `Basic ${credentials}`,
             },
+            credentials: "include"
         });
         
         if(response.ok){
