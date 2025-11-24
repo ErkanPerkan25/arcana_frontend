@@ -1,10 +1,10 @@
 import {useState} from "react"
 import { Link } from "react-router-dom";
 
-function HomeCard({title, url, type}){
+function HomeCard({title, url, link_url}){
     return(
-        <div className="relative text-center m-10 shadow-2xl rounded-2xl transform transtion duration-200 ease-in-out hover:scale-108">
-            <Link to={`/products/${type}`}>
+        <div className="relative text-center m-10 shadow-2xl border-solid border-3 border-[#ebdbb2] rounded-2xl transform transtion duration-200 ease-in-out hover:scale-108">
+            <Link to={`${link_url}`}>
                 <img
                     className="w-80 h-full object-cover rounded-xl"
                     src={url} 

@@ -3,11 +3,13 @@ import { useNavigate } from "react-router-dom";
 import AccountInfo from "../components/AccountInfo";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
+import { useAuth } from "../components/auth/useAuth";
 
 function DashboardPage(){
 
+    const auth = useAuth();
     const navigate = useNavigate();
-    const isAuthenticated = sessionStorage.getItem("sessionID");
+    const isAuthenticated = auth.isAuthenticated;
 
     useEffect(() =>{
         if(!isAuthenticated){

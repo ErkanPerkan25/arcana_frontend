@@ -11,7 +11,7 @@ function Footer(){
     }
 
     return(
-        <div className="relative w-full h-30 fixed mt-20 left-0 bottom-0 text-[#ebdbb2] p-4">
+        <div className="relative w-full h-40 mt-20 fixed left-0 bottom-0 text-[#ebdbb2] p-4">
             <div className="w-full">
                 <div className="w-[70%] ml-auto mr-auto flex flex-row gap-20 p-2">
                     <h1 className="text-4xl font-bold text-[#fe8019]">Arcana</h1>
