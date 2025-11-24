@@ -52,7 +52,7 @@ function BooksPage(){
             method: "GET",
             headers: {
                 //"User-Agent" : "Arcana/1.0 (ericahansson.united@gmail.com)"
-                "Authorization": `Bearer ${sessionStorage.getItem("sessionID")}`,
+                "Authorization": `Bearer ${auth.token}`,
             }
         })
         .then(response => response.json())

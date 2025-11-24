@@ -15,7 +15,7 @@ function AccountInfo(){
             method: "GET",
             headers: {
                 "Content-type": "application/json",
-                "Authorization": `Bearer ${sessionStorage.getItem("sessionID")}`,
+                "Authorization": `Bearer ${auth.token}`,
             }
         });
 

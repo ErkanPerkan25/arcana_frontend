@@ -14,8 +14,8 @@ const AuthProvider = ({children}) =>{
         setUsername(username);
         setToken(token);
         setCookie("isAuthenticated", true);
-        setCookie("username", username);
-        setCookie("token", token);
+        setCookie("username", username, {secure: true, httpOnly: false});
+        setCookie("token", token, {secure: true, httpOnly: false});
     }
 
     const logout = () =>{
