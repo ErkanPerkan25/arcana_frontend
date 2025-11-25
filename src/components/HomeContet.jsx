@@ -11,7 +11,7 @@ function HomeContent(){
             </div>
 
 
-            <div className="flex flex-row justify-center p-5">
+            <div className="flex flex-col lg:flex-row justify-center p-5">
             {data.map((item,index)=>(
                 <HomeCard
                     key={index}

@@ -11,12 +11,12 @@ function Footer(){
     }
 
     return(
-        <div className="relative w-full h-40 mt-20 fixed left-0 bottom-0 text-[#ebdbb2] p-4">
+        <div className="relative w-full h-65 sm:h-40 md:h-40 mt-20 fixed left-0 bottom-0 text-[#ebdbb2] p-4">
             <div className="w-full">
-                <div className="w-[70%] ml-auto mr-auto flex flex-row gap-20 p-2">
-                    <h1 className="text-4xl font-bold text-[#fe8019]">Arcana</h1>
-                    <ul className="flex flex-row justify-center mt-3 gap-12 list-none gap-2">
-                        <li>
+                <div className="w-[70%] ml-auto mr-auto flex flex-col md:flex-row md:gap-20 p-2">
+                    <h1 className="mr-auto ml-auto md:ml-0 md:mr-0 text-4xl font-bold text-[#fe8019]">Arcana</h1>
+                    <ul className="flex flex-col sm:flex-row justify-center mt-3 gap-2 md:gap-12 md:list-none ">
+                        <li className="mr-auto ml-auto">
                             <Link className="relative hover:cursor-pointer after:w-[0%] after:bottom-0 after:left-[50%] 
                                 after:absolute after:bg-[#8ec07c] after:h-[2px]
                                 after:transition-all after:duration-300 after:ease-in-out 
@@ -26,7 +26,7 @@ function Footer(){
                                 Home
                             </Link>
                         </li>
-                        <li>
+                        <li className="mr-auto ml-auto">
                             <Link className="relative hover:cursor-pointer after:w-[0%] after:bottom-0 after:left-[50%] 
                                 after:absolute after:bg-[#8ec07c] after:h-[2px]
                                 after:transition-all after:duration-300 after:ease-in-out 
@@ -37,7 +37,7 @@ function Footer(){
                                 Books
                             </Link>
                         </li>
-                        <li>
+                        <li className="mr-auto ml-auto">
                             <Link className="relative hover:cursor-pointer after:w-[0%] after:bottom-0 after:left-[50%] 
                                 after:absolute after:bg-[#8ec07c] after:h-[2px]
                                 after:transition-all after:duration-300 after:ease-in-out 
@@ -48,7 +48,7 @@ function Footer(){
                                 Settings
                             </Link>
                         </li>
-                        <li>
+                        <li className="mr-auto ml-auto">
                             <Link className="relative hover:cursor-pointer after:w-[0%] after:bottom-0 after:left-[50%] 
                                 after:absolute after:bg-[#8ec07c] after:h-[2px]
                                 after:transition-all after:duration-300 after:ease-in-out 
