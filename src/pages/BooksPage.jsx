@@ -81,7 +81,7 @@ function BooksPage(){
         <div className="font-display overscroll-none p-1 relative w-screen min-h-screen bg-[#32302f]">
             <Navbar />
             <h1 className="text-3xl text-[#d3869b] font-bold text-center">Book Collection</h1>
-            <div className="float-right mr-40">
+            <div className="float-right mr-5 sm:mr-10 md:15 lg:mr-20">
                 <button 
                     className="block w-12 h-12 text-3xl bg-[#89b482] rounded-full p-1 mr-auto ml-auto cursor-pointer"
                     type="button"
@@ -106,8 +106,8 @@ function BooksPage(){
                     }
                 </div>
             </div>
-            <Footer />
             {isHidden ? null : <SearchComp hidVar={isHidden} infoBack={setDataFromChild}/>}
+            <Footer />
         </div>
     )
 }

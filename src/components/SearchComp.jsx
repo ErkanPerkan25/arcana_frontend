@@ -69,8 +69,8 @@ function SearchComp({hidVar, infoBack}){
 
 
     return(
-        <div id="overlay" className={`h-full overflow-scroll fixed inset-0 bg-black/80`}>
-            <div className="absolute w-full mt-20 pr-20 pl-20">
+        <div id="overlay" className={`min-h-screen w-full overflow-scroll fixed inset-0 bg-black/80`}>
+            <div className="absolute w-full mt-5 p-10">
                 <div className="absolute float-right mr-20">
                     <button type="button" 
                         className="text-4xl text-[#a89984] cursor-pointer" 
@@ -88,7 +88,7 @@ function SearchComp({hidVar, infoBack}){
                     value={query}
                     onChange={(e) => (setQuery(e.target.value))}
                     placeholder="Search for a book"
-                    className={`bg-white text-md text-black rounded-xl p-2 mb-20 border-solid border-3 border-[#a89984]
+                    className={`w-90 sm:w-100 md:w-110 lg:w-120 bg-white text-md text-black rounded-xl p-2 mb-20 border-solid border-3 border-[#a89984]
                     focus:border-sky-500 focus:outline placeholder:italic block ml-auto mr-auto`}
                 />
 

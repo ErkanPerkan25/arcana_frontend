@@ -3,8 +3,9 @@ import { Link } from "react-router-dom";
 
 function Navbar(){
     return(
-        <div className="w-120 mr-auto ml-auto p-8">
-            <ul className="flex flex-row justify-center ring-2 p-3 rounded-full ml-auto mr-auto list-none gap-15 text-[#ebdbb2] shadow-xl/30 uppercase text-xl font-bold">
+        <div className="w-60 sm:w-70 md:w-90 lg:w-120 mr-auto ml-auto pt-10 pb-10">
+            <ul className="w-60 sm:w-70 md:w-90 lg:w-120 flex flex-row justify-center ring-2 p-3 rounded-full ml-auto mr-auto list-none
+                gap-5 sm:gap-8 md:gap-11 lg:gap-15 text-[#ebdbb2] shadow-xl/30 uppercase text-sm md:text-md lg:text-xl font-bold">
                 <li 
                     className="relative after:w-[0%] after:bottom-0 after:left-[50%] 
                         after:absolute after:bg-[#8ec07c] after:h-[2px]

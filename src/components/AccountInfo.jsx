@@ -38,7 +38,7 @@ function AccountInfo(){
     }, [])
 
     return(
-        <div className={`w-300 mr-auto ml-auto text-[#ebdbb2] border-solid border-3 border-[#a89984] shadow-2xl/150 bg-[#665c54] p-4 rounded-3xl`}>
+        <div className={`w-100 sm:w-150 md:w-200 lg:w-300 mr-auto ml-auto text-[#ebdbb2] border-solid border-3 border-[#a89984] shadow-2xl/150 bg-[#665c54] p-4 rounded-3xl`}>
             <h1 className="text-center text-[#ebdbb2] font-bold text-2xl">Dasboard</h1>
             <div>
                 <UserInfo
