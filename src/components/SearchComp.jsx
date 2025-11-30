@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import Book from "./Book";
 import { apiUrl } from "../api/apiUrl";
 import { useAuth } from "./auth/useAuth";
 import BookSearch from "./BookSearch";
@@ -93,7 +92,8 @@ function SearchComp({hidVar, infoBack}){
                 />
 
                 <div className="grid grid-flow-row grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-                    {data.map((item, index) =>(
+                    {!data ? "" :
+                        data.map((item, index) =>(
                         <div
                             key={index}
                             onClick={() => addBook(index)}
