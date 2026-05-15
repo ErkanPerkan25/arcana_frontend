@@ -5,9 +5,9 @@ with in a book, and keeps it simplistic to write, update, and delete notes.
 ## Table of Contents
 - [Technologies](#Technologies)
 - [Features](#Features)
-- [The Process](#The Process)
-- [What I have learned](#What I have learned)
-- [How it can be improved](#How it can be improved)
+- [The Process](#The-Process)
+- [What I have learned](#What-I-have-learned)
+- [How it can be improved](#How-it-can-be-improved)
 - [License](#license)
 
 ## 🛠 Technologies
